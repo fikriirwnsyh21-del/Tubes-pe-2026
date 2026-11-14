@@ -1,4 +1,4 @@
-# SetUp Pedia - E-Commerce Praktikum
+# SetUp Pedia - E-Commerce TUBES PEMROGRAMAN ECOMMERCE
 
 Aplikasi web e-commerce untuk perlengkapan komputer, laptop, dan gaming setup yang dibangun menggunakan **Laravel 13**, **MySQL**, **Tailwind CSS**, dan **Midtrans Payment Gateway (Sandbox)**. 
 
