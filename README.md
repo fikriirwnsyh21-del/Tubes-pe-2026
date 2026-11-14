@@ -106,7 +106,9 @@ Sistem **tidak hanya mengandalkan redirect URL browser** pengguna. Verifikasi pe
 * Route: `POST /api/midtrans/callback` dan `POST /midtrans/callback`
 * Controller: `MidtransCallbackController@handle`
 * Keamanan: Menghitung hash SHA-512 dari kombinasi:
-  $$\text{Signature} = \text{SHA512}(\text{order\_id} + \text{status\_code} + \text{gross\_amount} + \text{ServerKey})$$
+  ```text
+  Signature = SHA512(order_id + status_code + gross_amount + ServerKey)
+  ```
 * Jika signature tidak valid, request ditolak (`401 Unauthorized`).
 * Jika valid, status pesanan diperbarui secara atomik. Jika transaksi batal/kedaluwarsa (`cancel`, `expire`, `deny`), stok barang otomatis dikembalikan ke inventori (*inventory rollback*).
 
