@@ -52,16 +52,34 @@
     }
 }">
 
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-xs text-gray-500">
-        <a href="{{ route('home') }}" class="hover:text-emerald-600">Home</a>
-        <span>/</span>
-        <a href="{{ route('products.index') }}" class="hover:text-emerald-600">Produk</a>
-        <span>/</span>
-        <a href="{{ route('products.index', ['category' => $product->category->slug]) }}" class="hover:text-emerald-600">{{ $product->category->name }}</a>
-        <span>/</span>
-        <span class="text-gray-900 font-semibold truncate max-w-xs sm:max-w-md">{{ $product->name }}</span>
-    </nav>
+    <!-- Top Action / Back & Breadcrumb -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
+        <div class="flex items-center gap-3">
+            <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('products.index') }}"
+               class="px-3.5 py-2 rounded-xl bg-white hover:bg-gray-50 border border-gray-300 hover:border-gray-400 text-gray-700 text-xs font-bold shadow-2xs transition inline-flex items-center gap-1.5 group shrink-0">
+                <svg class="w-4 h-4 text-gray-500 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                <span>Kembali</span>
+            </a>
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 text-xs text-gray-500 overflow-x-auto whitespace-nowrap">
+                <a href="{{ route('home') }}" class="hover:text-emerald-600">Home</a>
+                <span>/</span>
+                <a href="{{ route('products.index') }}" class="hover:text-emerald-600">Produk</a>
+                <span>/</span>
+                <a href="{{ route('products.index', ['category' => $product->category->slug]) }}" class="hover:text-emerald-600">{{ $product->category->name }}</a>
+                <span>/</span>
+                <span class="text-gray-900 font-semibold truncate max-w-[160px] sm:max-w-xs">{{ $product->name }}</span>
+            </nav>
+        </div>
+
+        <a href="{{ route('home') }}" class="text-xs font-bold text-gray-500 hover:text-emerald-600 inline-flex items-center gap-1.5 transition self-start sm:self-auto">
+            <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Ke Beranda SetUp Pedia</span>
+        </a>
+    </div>
 
     <!-- Main Product Section -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-xs">
@@ -233,30 +251,46 @@
 
                 <!-- Action Buttons (Add to Cart & Buy Now) -->
                 <div class="space-y-2.5 pt-2">
-                    <form action="{{ route('cart.add') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="variant_id" :value="selectedVariantId">
-                        <input type="hidden" name="quantity" :value="quantity">
-                        
-                        <button type="submit"
-                                class="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl border border-emerald-300 transition duration-150 flex items-center justify-center gap-2 shadow-2xs">
-                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                            <span>+ Keranjang</span>
-                        </button>
-                    </form>
+                    @if(auth()->check() && auth()->user()->isAdmin())
+                        <div class="p-3.5 bg-purple-50 rounded-2xl border border-purple-200 text-center space-y-2">
+                            <div class="flex items-center justify-center gap-1.5 text-purple-700 font-extrabold text-xs">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span>Akun Administrator Toko</span>
+                            </div>
+                            <p class="text-[11px] text-purple-900/80 leading-relaxed font-medium">
+                                Anda sedang masuk sebagai Administrator. Akun Admin bertugas mengelola platform dan tidak dapat melakukan transaksi belanja.
+                            </p>
+                            <a href="{{ route('admin.dashboard') }}"
+                               class="inline-flex items-center justify-center gap-1.5 w-full py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl transition shadow-xs">
+                                <span>Buka Panel Dashboard Admin &rarr;</span>
+                            </a>
+                        </div>
+                    @else
+                        <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="variant_id" :value="selectedVariantId">
+                            <input type="hidden" name="quantity" :value="quantity">
+                            
+                            <button type="submit"
+                                    class="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl border border-emerald-300 transition duration-150 flex items-center justify-center gap-2 shadow-2xs">
+                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                <span>+ Keranjang</span>
+                            </button>
+                        </form>
 
-                    <form action="{{ route('cart.buy-now') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="variant_id" :value="selectedVariantId">
-                        <input type="hidden" name="quantity" :value="quantity">
-                        
-                        <button type="submit"
-                                class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition duration-150 flex items-center justify-center gap-2">
-                            <span>Beli Sekarang</span>
-                        </button>
-                    </form>
+                        <form action="{{ route('cart.buy-now') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="variant_id" :value="selectedVariantId">
+                            <input type="hidden" name="quantity" :value="quantity">
+                            
+                            <button type="submit"
+                                    class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition duration-150 flex items-center justify-center gap-2">
+                                <span>Beli Sekarang</span>
+                            </button>
+                        </form>
+                    @endif
                 </div>
 
                 <!-- Wishlist Toggle -->
@@ -271,6 +305,14 @@
                         </button>
                     </form>
                 @endauth
+
+                <!-- Back to Catalog Link -->
+                <div class="pt-2.5 border-t border-gray-100 text-center">
+                    <a href="{{ route('products.index') }}" class="text-xs font-bold text-gray-500 hover:text-emerald-600 transition inline-flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        <span>Lihat Produk Lainnya</span>
+                    </a>
+                </div>
             </div>
         </div>
 

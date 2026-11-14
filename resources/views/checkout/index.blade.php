@@ -5,7 +5,7 @@
 @section('content')
 <div class="w-full max-w-7xl 2xl:max-w-[1600px] mx-auto space-y-6" x-data="{
     selectedAddressId: {{ $primaryAddress ? $primaryAddress->id : 'null' }},
-    selectedPayment: 'QRIS (Semua Pembayaran)',
+    selectedPayment: 'Midtrans Snap (Semua Pembayaran Sandbox)',
     shippingCost: 15000,
     subtotal: {{ $selectedItems->sum(fn($i) => $i->subtotal) }},
     discountAmount: 0,
@@ -58,6 +58,33 @@
         });
     }
 }">
+
+    <!-- Top Navigation / Back & Breadcrumb -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <a href="{{ route('cart.index') }}"
+               class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 hover:border-slate-300 text-slate-700 text-xs font-bold shadow-2xs transition inline-flex items-center gap-1.5 group shrink-0">
+                <svg class="w-4 h-4 text-slate-500 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                <span>Kembali ke Keranjang</span>
+            </a>
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+                <a href="{{ route('home') }}" class="hover:text-emerald-600">Home</a>
+                <span class="text-slate-300">/</span>
+                <a href="{{ route('cart.index') }}" class="hover:text-emerald-600">Keranjang</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-900 font-bold">Checkout Pembayaran</span>
+            </nav>
+        </div>
+
+        <a href="{{ route('home') }}" class="text-xs font-bold text-slate-500 hover:text-emerald-600 inline-flex items-center gap-1.5 transition self-start sm:self-auto">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Ke Beranda SetUp Pedia</span>
+        </a>
+    </div>
 
     <!-- Title -->
     <div>
@@ -225,21 +252,28 @@
                                         </div>
 
                                         <!-- Brand Icon -->
-                                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shrink-0 shadow-2xs {{ 
-                                            $m['icon'] === 'QRIS' ? 'bg-gradient-to-br from-rose-600 to-red-700 text-white' : (
-                                            $m['icon'] === 'BCA' ? 'bg-blue-700 text-white font-mono' : (
-                                            $m['icon'] === 'Mandiri' ? 'bg-sky-900 text-amber-300 font-mono' : (
-                                            $m['icon'] === 'BRI' ? 'bg-blue-600 text-white font-mono' : (
-                                            $m['icon'] === 'BNI' ? 'bg-teal-700 text-amber-200 font-mono' : (
-                                            $m['icon'] === 'GoPay' ? 'bg-cyan-500 text-white' : (
-                                            $m['icon'] === 'DANA' ? 'bg-blue-500 text-white' : 'bg-emerald-600 text-white'
-                                            )))))) }}">
-                                            @if($m['icon'] === 'QRIS')
+                                        @php
+                                            $iconBg = match($m['icon'] ?? '') {
+                                                'Midtrans' => 'bg-gradient-to-br from-blue-600 via-indigo-600 to-sky-500 text-white',
+                                                'QRIS' => 'bg-gradient-to-br from-rose-600 to-red-700 text-white',
+                                                'BCA' => 'bg-blue-700 text-white font-mono',
+                                                'Mandiri' => 'bg-sky-900 text-amber-300 font-mono',
+                                                'BRI' => 'bg-blue-600 text-white font-mono',
+                                                'BNI' => 'bg-teal-700 text-amber-200 font-mono',
+                                                'GoPay' => 'bg-cyan-500 text-white',
+                                                'DANA' => 'bg-blue-500 text-white',
+                                                default => 'bg-emerald-600 text-white',
+                                            };
+                                        @endphp
+                                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shrink-0 shadow-2xs {{ $iconBg }}">
+                                            @if(($m['icon'] ?? '') === 'Midtrans')
+                                                <span class="tracking-tight font-black text-[9px]">SNAP</span>
+                                            @elseif(($m['icon'] ?? '') === 'QRIS')
                                                 <span class="tracking-tighter font-black text-[11px]">QRIS</span>
-                                            @elseif($m['icon'] === 'COD')
+                                            @elseif(($m['icon'] ?? '') === 'COD')
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                             @else
-                                                <span>{{ $m['icon'] }}</span>
+                                                <span>{{ $m['icon'] ?? 'PAY' }}</span>
                                             @endif
                                         </div>
 
@@ -266,7 +300,16 @@
 
                 <!-- Dynamic Helper Callout -->
                 <div class="p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-1">
-                    <template x-if="selectedPayment.includes('QRIS')">
+                    <template x-if="selectedPayment.includes('Midtrans')">
+                        <div class="flex items-start gap-2.5">
+                            <span class="text-lg">💳</span>
+                            <div>
+                                <strong class="text-gray-900 block text-xs">Instruksi Midtrans Snap (Sandbox):</strong>
+                                <span class="text-gray-600 leading-relaxed">Setelah menekan tombol <em>Bayar Sekarang</em>, jendela pop-up resmi <strong>Midtrans Snap Sandbox</strong> akan terbuka otomatis. Anda dapat memilih seluruh metode pembayaran sandbox seperti QRIS, GoPay, Virtual Account Bank (BCA, Mandiri, BNI, BRI, Permata), atau Kartu Kredit.</span>
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="selectedPayment.includes('QRIS') && !selectedPayment.includes('Midtrans Snap')">
                         <div class="flex items-start gap-2.5">
                             <span class="text-lg">📱</span>
                             <div>
@@ -289,7 +332,7 @@
                             <span class="text-lg">⚡</span>
                             <div>
                                 <strong class="text-gray-900 block text-xs">Instruksi Pembayaran Dompet Digital:</strong>
-                                <span class="text-gray-600 leading-relaxed">Saldo dompet digital Anda akan diproses secara langsung dan aman melalui gerbang pembayaran resmi Kebutuhan Gaming Gen Z.</span>
+                                <span class="text-gray-600 leading-relaxed">Saldo dompet digital Anda akan diproses secara langsung dan aman melalui gerbang pembayaran resmi SetUp Pedia.</span>
                             </div>
                         </div>
                     </template>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
-use App\Services\CartService;
+use App\Models\Address;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Services\CheckoutService;
 use App\Services\VoucherService;
 use Exception;
@@ -15,7 +17,6 @@ use Illuminate\View\View;
 class CheckoutController extends Controller
 {
     public function __construct(
-        public CartService $cartService,
         public CheckoutService $checkoutService,
         public VoucherService $voucherService
     ) {}
@@ -23,26 +24,27 @@ class CheckoutController extends Controller
     public function index(Request $request): View|RedirectResponse
     {
         $user = $request->user();
-        $cart = $this->cartService->getCart($user);
-        $cart->load([
-            'items.product.shop',
-            'items.product.primaryImage',
-            'items.product.activeFlashSale',
-            'items.variant',
-        ]);
 
-        $selectedItems = $cart->items->where('is_selected', true);
-
-        if ($selectedItems->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Silakan pilih minimal satu produk untuk checkout.');
+        $cart = Cart::where('user_id', $user->id)->first();
+        if (! $cart) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang belanja Anda kosong.');
         }
 
-        $addresses = $user->addresses()->orderByDesc('is_primary')->get();
-        $primaryAddress = $addresses->where('is_primary', true)->first() ?? $addresses->first();
+        $selectedItems = CartItem::with(['product.primaryImage', 'product.shop', 'variant'])
+            ->where('cart_id', $cart->id)
+            ->where('is_selected', true)
+            ->get();
+
+        if ($selectedItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Silakan pilih setidaknya 1 produk di keranjang belanja untuk checkout.');
+        }
+
+        $addresses = Address::where('user_id', $user->id)->orderByDesc('is_primary')->latest()->get();
+        $primaryAddress = $addresses->firstWhere('is_primary', true) ?? $addresses->first();
 
         $couriers = [
             [
-                'name' => 'Reguler (J&T Express - 2-3 Hari)',
+                'name' => 'Reguler (JNE / SiCepat / J&T - 2-3 Hari)',
                 'service' => 'Reguler',
                 'etd' => '2-3 Hari',
                 'cost' => 15000,
@@ -63,90 +65,90 @@ class CheckoutController extends Controller
 
         $paymentMethods = [
             [
-                'category' => 'QRIS & E-Wallet (Scan & Bayar Instan)',
-                'badge' => 'Paling Populer',
+                'category' => 'Midtrans Payment Gateway (Sandbox)',
+                'badge' => 'Rekomendasi Utama',
                 'methods' => [
                     [
-                        'id' => 'qris',
-                        'name' => 'QRIS (Semua Pembayaran)',
-                        'code' => 'QRIS',
-                        'type' => 'qris',
+                        'id' => 'midtrans_snap',
+                        'name' => 'Midtrans Snap (Semua Pembayaran Sandbox)',
+                        'code' => 'MIDTRANS',
+                        'type' => 'gateway',
                         'fee' => 0,
-                        'desc' => 'Scan otomatis via GoPay, OVO, DANA, ShopeePay, BCA Mobile, Livin, BRImo, dll.',
-                        'badge' => 'Rekomendasi',
-                        'icon' => 'QRIS',
-                    ],
-                    [
-                        'id' => 'gopay',
-                        'name' => 'GoPay / Gojek',
-                        'code' => 'GOPAY',
-                        'type' => 'ewallet',
-                        'fee' => 0,
-                        'desc' => 'Pembayaran praktis langsung dari saldo GoPay Anda.',
-                        'badge' => 'Instan',
-                        'icon' => 'GoPay',
-                    ],
-                    [
-                        'id' => 'dana',
-                        'name' => 'DANA Wallet',
-                        'code' => 'DANA',
-                        'type' => 'ewallet',
-                        'fee' => 0,
-                        'desc' => 'Pembayaran aman dengan saldo DANA terintegrasi.',
-                        'badge' => 'Instan',
-                        'icon' => 'DANA',
+                        'desc' => 'Pop-up otomatis Midtrans Snap: QRIS, GoPay, ShopeePay, Virtual Account (BCA, Mandiri, BNI, BRI, Permata), dan Kartu Kredit.',
+                        'badge' => 'Paling Lengkap',
+                        'icon' => 'Midtrans',
                     ],
                 ],
             ],
             [
-                'category' => 'Virtual Account (Verifikasi Otomatis 24 Jam)',
-                'badge' => 'Bebas Admin',
+                'category' => 'Channel Spesifik Midtrans Sandbox',
+                'badge' => 'Verifikasi Otomatis',
                 'methods' => [
                     [
-                        'id' => 'bca_va',
-                        'name' => 'BCA Virtual Account',
-                        'code' => 'BCA_VA',
-                        'type' => 'va',
+                        'id' => 'qris',
+                        'name' => 'QRIS Sandbox (Midtrans)',
+                        'code' => 'QRIS',
+                        'type' => 'gateway',
                         'fee' => 0,
-                        'desc' => 'Bayar via m-BCA, KlikBCA, atau ATM BCA dengan verifikasi otomatis 24 jam.',
-                        'badge' => 'Otomatis',
+                        'desc' => 'Scan otomatis via GoPay, OVO, DANA, ShopeePay, BCA Mobile, Livin, BRImo, dll.',
+                        'badge' => 'Scan & Bayar',
+                        'icon' => 'QRIS',
+                    ],
+                    [
+                        'id' => 'gopay',
+                        'name' => 'GoPay Sandbox (Midtrans)',
+                        'code' => 'GOPAY',
+                        'type' => 'gateway',
+                        'fee' => 0,
+                        'desc' => 'Pembayaran instan langsung dari saldo GoPay uji coba Midtrans.',
+                        'badge' => 'E-Wallet',
+                        'icon' => 'GoPay',
+                    ],
+                    [
+                        'id' => 'bca_va',
+                        'name' => 'BCA Virtual Account (Midtrans)',
+                        'code' => 'BCA_VA',
+                        'type' => 'gateway',
+                        'fee' => 0,
+                        'desc' => 'Transfer virtual account BCA verifikasi instan 24 jam.',
+                        'badge' => 'Bank Transfer',
                         'icon' => 'BCA',
                     ],
                     [
                         'id' => 'mandiri_va',
-                        'name' => 'Mandiri Virtual Account',
+                        'name' => 'Mandiri Virtual Account (Midtrans)',
                         'code' => 'MANDIRI_VA',
-                        'type' => 'va',
+                        'type' => 'gateway',
                         'fee' => 0,
-                        'desc' => 'Bayar via Livin by Mandiri atau ATM Mandiri tanpa konfirmasi.',
-                        'badge' => 'Otomatis',
+                        'desc' => 'Transfer virtual account Bank Mandiri verifikasi instan 24 jam.',
+                        'badge' => 'Bank Transfer',
                         'icon' => 'Mandiri',
                     ],
                     [
                         'id' => 'bri_va',
-                        'name' => 'BRI Virtual Account (BRIVA)',
+                        'name' => 'BRI Virtual Account (Midtrans)',
                         'code' => 'BRI_VA',
-                        'type' => 'va',
+                        'type' => 'gateway',
                         'fee' => 0,
-                        'desc' => 'Bayar via BRImo atau ATM BRI kapan saja.',
-                        'badge' => 'Otomatis',
+                        'desc' => 'Transfer BRIVA verifikasi otomatis via ATM atau BRImo.',
+                        'badge' => 'Bank Transfer',
                         'icon' => 'BRI',
                     ],
                     [
                         'id' => 'bni_va',
-                        'name' => 'BNI Virtual Account',
+                        'name' => 'BNI Virtual Account (Midtrans)',
                         'code' => 'BNI_VA',
-                        'type' => 'va',
+                        'type' => 'gateway',
                         'fee' => 0,
-                        'desc' => 'Bayar via BNI Mobile Banking atau ATM BNI.',
-                        'badge' => 'Otomatis',
+                        'desc' => 'Transfer virtual account BNI verifikasi otomatis via BNI Mobile.',
+                        'badge' => 'Bank Transfer',
                         'icon' => 'BNI',
                     ],
                 ],
             ],
             [
-                'category' => 'Bayar di Tempat (COD)',
-                'badge' => 'Bayar Tunai',
+                'category' => 'Pembayaran Tunai',
+                'badge' => 'Bayar di Tempat',
                 'methods' => [
                     [
                         'id' => 'cod',
@@ -154,7 +156,7 @@ class CheckoutController extends Controller
                         'code' => 'COD',
                         'type' => 'cod',
                         'fee' => 0,
-                        'desc' => 'Bayar tunai kepada kurir saat paket sampai dengan aman di rumah Anda.',
+                        'desc' => 'Bayar tunai langsung kepada kurir saat paket pesanan sampai di alamat Anda.',
                         'badge' => 'Tunai',
                         'icon' => 'COD',
                     ],

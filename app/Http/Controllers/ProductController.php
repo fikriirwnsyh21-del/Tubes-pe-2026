@@ -12,6 +12,9 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
+        // Auto-seed curated budget products (< Rp 5jt) if not yet seeded
+        \App\Services\BudgetProductsSeeder::seedIfNeeded();
+
         $query = Product::with(['shop', 'primaryImage', 'images', 'category', 'activeFlashSale'])
             ->where('is_active', true);
 

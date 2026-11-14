@@ -23,11 +23,7 @@
             </a>
             <a href="{{ route('admin.users.index', ['role' => 'customer']) }}"
                class="px-3 py-1.5 rounded-lg font-bold transition shrink-0 {{ request('role') === 'customer' ? 'bg-emerald-50 text-emerald-700 font-black' : 'text-slate-500 hover:bg-slate-100' }}">
-                Pembeli
-            </a>
-            <a href="{{ route('admin.users.index', ['role' => 'seller']) }}"
-               class="px-3 py-1.5 rounded-lg font-bold transition shrink-0 {{ request('role') === 'seller' ? 'bg-emerald-50 text-emerald-700 font-black' : 'text-slate-500 hover:bg-slate-100' }}">
-                Penjual
+                Pelanggan
             </a>
             <a href="{{ route('admin.users.index', ['role' => 'admin']) }}"
                class="px-3 py-1.5 rounded-lg font-bold transition shrink-0 {{ request('role') === 'admin' ? 'bg-emerald-50 text-emerald-700 font-black' : 'text-slate-500 hover:bg-slate-100' }}">

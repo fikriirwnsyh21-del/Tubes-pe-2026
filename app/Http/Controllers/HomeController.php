@@ -12,6 +12,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        // Auto-seed 50 curated budget products (< Rp 5jt with mostly laptops) if not yet seeded
+        \App\Services\BudgetProductsSeeder::seedIfNeeded();
+
         $banners = Banner::where('is_active', true)
             ->where('position', 'hero')
             ->orderBy('sort_order')
@@ -54,6 +57,15 @@ class HomeController extends Controller
             ->get();
 
         // Curated Collections for Gen Z Gamers
+        $gamingLaptops = Product::with(['shop', 'primaryImage', 'images', 'activeFlashSale'])
+            ->where('is_active', true)
+            ->whereHas('category', function ($q) {
+                $q->whereIn('slug', ['laptop-gaming']);
+            })
+            ->orderBy('price', 'asc')
+            ->take(12)
+            ->get();
+
         $esportsGear = Product::with(['shop', 'primaryImage', 'images', 'activeFlashSale'])
             ->where('is_active', true)
             ->whereHas('category', function ($q) {
@@ -86,6 +98,7 @@ class HomeController extends Controller
             'bestSellers',
             'newArrivals',
             'recommended',
+            'gamingLaptops',
             'esportsGear',
             'pcBuilders',
             'consoleStream'

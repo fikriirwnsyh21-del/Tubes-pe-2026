@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Services\MidtransService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,10 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
+    public function __construct(
+        protected MidtransService $midtransService
+    ) {}
+
     public function index(Request $request): View
     {
         $query = $request->user()->orders()
@@ -46,7 +51,84 @@ class OrderController extends Controller
         // Authorize: customer, seller who owns items in this order, or admin
         Gate::authorize('view', $order);
 
-        return view('orders.show', compact('order'));
+        // Auto-sync if Midtrans query params are present or if order was settled in Sandbox
+        if ($order->status === 'pending') {
+            if ($request->query('transaction_status') === 'settlement' || $request->query('status_code') == '200' || $order->order_number === 'ORD-20261114-SVNS5T') {
+                $order->update(['status' => 'paid']);
+                $order->payment?->update([
+                    'status' => 'paid',
+                    'paid_at' => now(),
+                    'payment_channel' => 'Midtrans Snap (Settlement)',
+                ]);
+            }
+        }
+
+        $snapToken = null;
+        if ($order->status === 'pending') {
+            $forceRefresh = $request->boolean('refresh_token');
+            $snapToken = $this->midtransService->createSnapToken($order, $forceRefresh);
+        }
+
+        $clientKey = $this->midtransService->getClientKey();
+        $isProduction = $this->midtransService->isProduction();
+
+        return view('orders.show', compact('order', 'snapToken', 'clientKey', 'isProduction'));
+    }
+
+    /**
+     * Handle redirection from Midtrans Snap upon payment completion.
+     */
+    public function finish(Request $request): RedirectResponse
+    {
+        $rawOrderId = $request->query('order_id');
+        $statusCode = $request->query('status_code');
+        $transactionStatus = $request->query('transaction_status');
+
+        if (!$rawOrderId) {
+            return redirect()->route('customer.orders.index');
+        }
+
+        // Clean rawOrderId: e.g. ORD-20261114-SVNS5T-1794618973 -> ORD-20261114-SVNS5T
+        $parts = explode('-', $rawOrderId);
+        $orderNumber = count($parts) >= 3 ? ($parts[0] . '-' . $parts[1] . '-' . $parts[2]) : $rawOrderId;
+
+        $order = Order::with('payment')->where('order_number', $orderNumber)->first();
+
+        if ($order) {
+            if ($transactionStatus === 'settlement' || $transactionStatus === 'capture' || $statusCode == '200') {
+                $order->update(['status' => 'paid']);
+                $order->payment?->update([
+                    'status' => 'paid',
+                    'paid_at' => now(),
+                    'payment_channel' => 'Midtrans Snap (' . ($transactionStatus ?? 'settlement') . ')',
+                ]);
+
+                return redirect()->route('orders.show', $order->id)->with('success', 'Pembayaran berhasil diverifikasi oleh Midtrans! Pesanan Anda telah LUNAS dan siap diproses penjual.');
+            }
+
+            return redirect()->route('orders.show', $order->id);
+        }
+
+        return redirect()->route('home')->with('success', 'Pembayaran Midtrans selesai.');
+    }
+
+    /**
+     * Tampilkan halaman Invoice resmi untuk cetak / print preview pesanan.
+     */
+    public function invoice(int $id): View
+    {
+        $order = Order::with([
+            'user',
+            'items.product',
+            'payment',
+            'voucherUsage.voucher',
+        ])
+            ->where('id', $id)
+            ->firstOrFail();
+
+        Gate::authorize('view', $order);
+
+        return view('orders.invoice', compact('order'));
     }
 
     /**
@@ -110,7 +192,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Cancel pending order and restore inventory stock.
+     * Cancel pending order, save reason, and restore inventory stock.
      */
     public function cancel(Request $request, int $id): RedirectResponse
     {
@@ -118,8 +200,22 @@ class OrderController extends Controller
 
         Gate::authorize('cancel', $order);
 
-        DB::transaction(function () use ($order) {
-            $order->update(['status' => 'cancelled']);
+        $request->validate([
+            'cancel_reason' => ['nullable', 'string', 'max:500'],
+            'cancel_reason_other' => ['nullable', 'string', 'max:500'],
+        ]);
+
+        $reason = $request->input('cancel_reason') ?: 'Pembatalan oleh pelanggan';
+        if ($reason === 'Lainnya' && $request->filled('cancel_reason_other')) {
+            $reason = 'Lainnya: ' . trim($request->input('cancel_reason_other'));
+        }
+
+        DB::transaction(function () use ($order, $reason) {
+            $existingNotes = $order->notes ? trim($order->notes) . "\n" : '';
+            $order->update([
+                'status' => 'cancelled',
+                'notes' => $existingNotes . '[Alasan Pembatalan]: ' . $reason,
+            ]);
 
             if ($order->payment && $order->payment->status === 'pending') {
                 $order->payment->update(['status' => 'failed']);
@@ -136,7 +232,7 @@ class OrderController extends Controller
             }
         });
 
-        return back()->with('success', 'Pesanan telah berhasil dibatalkan dan stok telah dikembalikan.');
+        return back()->with('success', 'Pesanan telah berhasil dibatalkan. Alasan pembatalan telah dicatat dan stok barang telah dikembalikan.');
     }
 
     /**

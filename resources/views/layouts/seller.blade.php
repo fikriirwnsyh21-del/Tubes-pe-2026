@@ -23,9 +23,16 @@
                 <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 text-gray-500 hover:text-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
-                <a href="{{ route('seller.dashboard') }}" class="flex items-center gap-2">
-                    <span class="font-black text-lg tracking-tight text-gray-900">Kebutuhan<span class="text-emerald-500">Gaming</span></span>
-                    <span class="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-500 text-white rounded">Gen Z Seller Center</span>
+                <a href="{{ route('seller.dashboard') }}" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-black text-xl tracking-tight text-gray-900 leading-none">SetUp<span class="text-emerald-600">Pedia</span></span>
+                        <span class="text-[10px] font-black px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full uppercase tracking-wider">
+                            Seller Center
+                        </span>
+                    </div>
                 </a>
             </div>
 
@@ -136,8 +143,8 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
-            <div class="max-w-7xl mx-auto space-y-6">
+        <main class="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-5 lg:p-6">
+            <div class="w-full space-y-6">
 
                 <!-- Alert Messages -->
                 @if(session('success'))

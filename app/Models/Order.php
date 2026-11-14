@@ -84,4 +84,18 @@ class Order extends Model
             default => 'bg-gray-100 text-gray-800 border-gray-300',
         };
     }
+
+    public function getCancelReasonAttribute(): ?string
+    {
+        if ($this->status !== 'cancelled' || empty($this->notes)) {
+            return null;
+        }
+
+        if (str_contains($this->notes, '[Alasan Pembatalan]: ')) {
+            $parts = explode('[Alasan Pembatalan]: ', $this->notes);
+            return trim(end($parts));
+        }
+
+        return trim($this->notes);
+    }
 }

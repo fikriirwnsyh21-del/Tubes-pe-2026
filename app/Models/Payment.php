@@ -37,7 +37,8 @@ class Payment extends Model
     public function getIsQrisAttribute(): bool
     {
         return str_contains(strtolower($this->payment_method), 'qris')
-            || str_contains(strtolower($this->payment_channel ?? ''), 'qris');
+            || str_contains(strtolower($this->payment_channel ?? ''), 'qris')
+            || str_contains(strtolower($this->payment_method), 'midtrans');
     }
 
     public function getIsVirtualAccountAttribute(): bool
@@ -106,7 +107,7 @@ class Payment extends Model
     public function getQrisQrUrlAttribute(): string
     {
         $payload = sprintf(
-            '00020101021226580016ID.CO.KEBUTUHANGAMINGGENZ.WWW0118936000140000000000520454115303360540%.2f5802ID5924KEBUTUHAN GAMING GEN Z6007JAKARTA61051234062%d6304ABCD',
+            '00020101021226580016ID.CO.SETUPPEDIA.WWW0118936000140000000000520454115303360540%.2f5802ID5911SETUP PEDIA6007JAKARTA61051234062%d6304ABCD',
             $this->amount,
             $this->order_id ?? 1
         );

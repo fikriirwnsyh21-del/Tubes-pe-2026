@@ -68,9 +68,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request): RedirectResponse
     {
         $user = DB::transaction(function () use ($request) {
-            $isSeller = $request->boolean('register_as_seller');
-            $roleSlug = $isSeller ? 'seller' : 'customer';
-            $role = Role::where('slug', $roleSlug)->firstOrFail();
+            $role = Role::where('slug', 'customer')->firstOrFail();
 
             $user = User::create([
                 'role_id' => $role->id,
@@ -81,21 +79,8 @@ class AuthController extends Controller
                 'is_active' => true,
             ]);
 
-            // Create initial empty shopping cart for customer/user
+            // Create initial empty shopping cart for customer
             Cart::create(['user_id' => $user->id]);
-
-            // If registered as seller, create shop
-            if ($isSeller && $request->filled('shop_name')) {
-                Shop::create([
-                    'user_id' => $user->id,
-                    'name' => $request->string('shop_name'),
-                    'slug' => Str::slug($request->string('shop_name')),
-                    'city' => $request->string('shop_city'),
-                    'rating' => 5.00,
-                    'followers_count' => 0,
-                    'is_active' => true,
-                ]);
-            }
 
             return $user;
         });
@@ -120,10 +105,6 @@ class AuthController extends Controller
     {
         if ($user->isAdmin()) {
             return redirect()->intended(route('admin.dashboard'));
-        }
-
-        if ($user->isSeller()) {
-            return redirect()->intended(route('seller.dashboard'));
         }
 
         return redirect()->intended(route('home'));

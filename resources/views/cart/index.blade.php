@@ -72,10 +72,50 @@
     }
 }">
 
-    <!-- Breadcrumb & Header Title -->
-    <div>
-        <h1 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Keranjang Belanja</h1>
-        <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Kelola produk yang ingin Anda beli sekarang atau nanti</p>
+    <!-- Top Navigation / Back & Breadcrumb -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('products.index') }}"
+               class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 hover:border-slate-300 text-slate-700 text-xs font-bold shadow-2xs transition inline-flex items-center gap-1.5 group shrink-0">
+                <svg class="w-4 h-4 text-slate-500 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                <span>Kembali</span>
+            </a>
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+                <a href="{{ route('home') }}" class="hover:text-emerald-600">Home</a>
+                <span class="text-slate-300">/</span>
+                <a href="{{ route('products.index') }}" class="hover:text-emerald-600">Katalog</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-900 font-bold">Keranjang Belanja</span>
+            </nav>
+        </div>
+
+        <a href="{{ route('home') }}" class="text-xs font-bold text-slate-500 hover:text-emerald-600 inline-flex items-center gap-1.5 transition self-start sm:self-auto">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Ke Beranda SetUp Pedia</span>
+        </a>
+    </div>
+
+    <!-- Header Title Banner -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/90 shadow-2xs">
+        <div>
+            <div class="flex items-center gap-3 mb-1">
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Keranjang Belanja</h1>
+                @if(!$cart->items->isEmpty())
+                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-black border border-emerald-200">
+                        {{ $cart->total_count }} Produk
+                    </span>
+                @endif
+            </div>
+            <p class="text-xs sm:text-sm text-slate-500">Kelola gear dan produk yang ingin Anda beli sekarang atau nanti</p>
+        </div>
+        <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 hover:border-emerald-300 transition shrink-0">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+            <span>Lanjut Belanja Gear</span>
+        </a>
     </div>
 
     @if($cart->items->isEmpty())

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Gear & Elektronik - Kebutuhan Gaming Gen Z')
+@section('title', 'Katalog Produk & Gaming Setup - SetUp Pedia')
 
 @section('content')
 <div class="space-y-6" x-data="{ mobileFilterOpen: false }">
@@ -58,43 +58,47 @@
         </div>
     </div>
 
-    <!-- Quick Filter Preset Chips -->
+    <!-- Quick Filter Preset Chips (Clean & Modern) -->
     <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1 hidden sm:inline">Pilihan Cepat:</span>
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider shrink-0 mr-1 hidden sm:inline">Filter Cepat:</span>
         @php
             $isAll = !request('filter') && !request('min_price') && !request('max_price') && !request('rating') && !request('stock');
         @endphp
         <a href="{{ route('products.index', request()->only(['q', 'category', 'sort'])) }}"
-           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ $isAll ? 'bg-slate-900 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50' }}">
-            Semua Pilihan
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ $isAll ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-slate-300 hover:bg-slate-50 font-medium' }}">
+            Semua
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['filter' => 'flash_sale'])) }}"
-           class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('filter') === 'flash_sale' ? 'bg-rose-600 text-white shadow-xs' : 'bg-white text-rose-600 border border-rose-200 hover:bg-rose-50' }}">
-            <span>🔥</span> Flash Sale
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('filter') === 'flash_sale' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            Flash Sale
+        </a>
+        <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['max_price' => 5000000])) }}"
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('max_price') == 5000000 && !request('min_price') ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            &lt; Rp 5 Juta (Budget)
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['max_price' => 1000000])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('max_price') == 1000000 && !request('min_price') ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-600' }}">
-            <span>⚡</span> &lt; Rp 1 Juta
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('max_price') == 1000000 && !request('min_price') ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            &lt; Rp 1 Juta
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['min_price' => 1000000, 'max_price' => 5000000])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('min_price') == 1000000 && request('max_price') == 5000000 ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-600' }}">
-            <span>💎</span> Rp 1 - 5 Juta
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('min_price') == 1000000 && request('max_price') == 5000000 ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            Rp 1 - 5 Juta
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['min_price' => 5000000, 'max_price' => 15000000])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('min_price') == 5000000 && request('max_price') == 15000000 ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-600' }}">
-            <span>🚀</span> Rp 5 - 15 Juta
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('min_price') == 5000000 && request('max_price') == 15000000 ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            Rp 5 - 15 Juta
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['min_price' => 15000000])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('min_price') == 15000000 && !request('max_price') ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-600' }}">
-            <span>👑</span> Flagship &gt; Rp 15 Juta
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('min_price') == 15000000 && !request('max_price') ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            &gt; Rp 15 Juta
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['rating' => 4])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('rating') == 4 ? 'bg-amber-500 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-amber-300 hover:text-amber-600' }}">
-            <span>★</span> Rating 4.0+
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('rating') == 4 ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            Rating 4.0+
         </a>
         <a href="{{ route('products.index', array_merge(request()->only(['q', 'category', 'sort']), ['stock' => 'ready'])) }}"
-           class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 {{ request('stock') === 'ready' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:border-emerald-300 hover:text-emerald-600' }}">
-            <span>📦</span> Stok Ready
+           class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs transition shrink-0 {{ request('stock') === 'ready' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'bg-white text-slate-700 border border-slate-200/90 hover:border-emerald-300 hover:text-emerald-600 font-medium' }}">
+            Stok Ready
         </a>
     </div>
 

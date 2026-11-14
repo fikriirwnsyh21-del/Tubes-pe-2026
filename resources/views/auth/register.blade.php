@@ -3,10 +3,13 @@
 @section('title', 'Daftar Akun Baru')
 
 @section('content')
-<div class="w-full max-w-lg bg-white rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-10" x-data="{ isSeller: {{ old('register_as_seller') ? 'true' : 'false' }} }">
+<div class="w-full max-w-lg bg-white rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-10" x-data="{
+    showPass: false,
+    showConfirm: false
+}">
     <div class="text-center mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Buat Akun Baru</h1>
-        <p class="text-sm text-gray-500 mt-2">Daftar akun Kebutuhan Gaming Gen Z untuk pengalaman berbelanja gear gaming terbaik.</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Daftar Akun Pelanggan</h1>
+        <p class="text-sm text-gray-500 mt-2">Daftar akun untuk mulai berbelanja di toko kami.</p>
     </div>
 
     @if ($errors->any())
@@ -46,52 +49,52 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="password" class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
-                <input id="password" type="password" name="password" required
-                       class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
-                       placeholder="Minimal 8 karakter">
+                <div class="relative">
+                    <input id="password" :type="showPass ? 'text' : 'password'" type="password" name="password" required
+                           class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
+                           placeholder="Minimal 8 karakter">
+                    <button type="button" @click="showPass = !showPass"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-700 focus:outline-hidden transition cursor-pointer"
+                            title="Tampilkan / Sembunyikan Password" tabindex="-1">
+                        <!-- Eye (visible) -->
+                        <svg x-show="showPass" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <!-- Eye slash (hidden) -->
+                        <svg x-show="!showPass" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div>
                 <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 mb-1">Ulangi Password</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required
-                       class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
-                       placeholder="Ketik ulang password">
+                <div class="relative">
+                    <input id="password_confirmation" :type="showConfirm ? 'text' : 'password'" type="password" name="password_confirmation" required
+                           class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
+                           placeholder="Ketik ulang password">
+                    <button type="button" @click="showConfirm = !showConfirm"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-700 focus:outline-hidden transition cursor-pointer"
+                            title="Tampilkan / Sembunyikan Password" tabindex="-1">
+                        <!-- Eye (visible) -->
+                        <svg x-show="showConfirm" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <!-- Eye slash (hidden) -->
+                        <svg x-show="!showConfirm" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Toggle Seller Mode -->
-        <div class="pt-2 pb-2">
-            <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" name="register_as_seller" value="1" x-model="isSeller"
-                           class="w-5 h-5 rounded text-emerald-600 focus:ring-emerald-500 border-gray-300">
-                    <div>
-                        <span class="font-bold text-gray-900 text-sm">Saya ingin langsung membuka Toko (Seller)</span>
-                        <p class="text-xs text-gray-500">Mulai berjualan produk Anda sendiri kepada jutaan pembeli</p>
-                    </div>
-                </label>
-            </div>
-        </div>
-
-        <!-- Additional Seller Fields -->
-        <div x-show="isSeller" x-cloak class="space-y-4 pt-2 border-t border-gray-100">
-            <div>
-                <label for="shop_name" class="block text-sm font-semibold text-gray-700 mb-1">Nama Toko</label>
-                <input id="shop_name" type="text" name="shop_name" value="{{ old('shop_name') }}"
-                       class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
-                       placeholder="Contoh: Berkah Gadget Store">
-            </div>
-            <div>
-                <label for="shop_city" class="block text-sm font-semibold text-gray-700 mb-1">Kota Toko</label>
-                <input id="shop_city" type="text" name="shop_city" value="{{ old('shop_city') }}"
-                       class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
-                       placeholder="Contoh: Jakarta Pusat">
-            </div>
-        </div>
-
-        <div class="pt-2">
+        <div class="pt-4">
             <button type="submit"
                     class="w-full py-3.5 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition duration-150 flex items-center justify-center gap-2 text-sm">
-                <span>Daftar Sekarang</span>
+                <span>Daftar Akun Pelanggan</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </button>
         </div>

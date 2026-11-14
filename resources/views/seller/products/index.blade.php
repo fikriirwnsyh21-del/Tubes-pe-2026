@@ -69,30 +69,31 @@
         @else
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
-                    <thead class="bg-gray-50/75 border-b border-gray-200 text-gray-400 uppercase text-[10px] tracking-wider font-black">
+                    <thead class="bg-gray-50/80 border-b border-gray-200 text-gray-400 uppercase text-[10px] tracking-wider font-black">
                         <tr>
-                            <th class="py-3.5 px-4">Info Produk</th>
-                            <th class="py-3.5 px-4">Kategori</th>
-                            <th class="py-3.5 px-4">Harga</th>
-                            <th class="py-3.5 px-4">Stok</th>
-                            <th class="py-3.5 px-4">Status</th>
-                            <th class="py-3.5 px-4 text-right">Aksi</th>
+                            <th class="py-3 px-3">Info Produk</th>
+                            <th class="py-3 px-2.5">Kategori</th>
+                            <th class="py-3 px-2.5 whitespace-nowrap">Harga</th>
+                            <th class="py-3 px-2 text-center whitespace-nowrap">Stok</th>
+                            <th class="py-3 px-2 text-center whitespace-nowrap">Status</th>
+                            <th class="py-3 px-3 text-right whitespace-nowrap">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @foreach($products as $p)
                             <tr class="hover:bg-gray-50/50 transition">
-                                <td class="py-3.5 px-4">
-                                    <div class="flex items-center gap-3">
+                                <td class="py-3 px-3">
+                                    <div class="flex items-center gap-2.5 max-w-[280px] xl:max-w-[360px]">
                                         <img src="{{ $p->thumbnail_url }}" alt="{{ $p->name }}"
                                              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80';"
-                                             class="w-12 h-12 rounded-xl object-cover border border-gray-100 shrink-0">
-                                        <div class="min-w-0">
+                                             class="w-10 h-10 rounded-lg object-cover border border-gray-100 shrink-0">
+                                        <div class="min-w-0 flex-1">
                                             <a href="{{ route('products.show', $p->slug) }}" target="_blank"
-                                               class="font-bold text-gray-900 hover:text-emerald-600 truncate block text-xs">
+                                               class="font-bold text-gray-900 hover:text-emerald-600 line-clamp-2 leading-snug block text-xs"
+                                               title="{{ $p->name }}">
                                                 {{ $p->name }}
                                             </a>
-                                            <p class="text-[10px] font-mono text-gray-400 mt-0.5">SKU: {{ $p->sku }}</p>
+                                            <p class="text-[10px] font-mono text-gray-400 mt-0.5 truncate">SKU: {{ $p->sku }}</p>
                                             @if($p->variants->isNotEmpty())
                                                 <span class="inline-block mt-0.5 text-[9px] font-bold px-1.5 py-0.2 bg-blue-50 text-blue-700 rounded">
                                                     {{ $p->variants->count() }} Varian
@@ -101,10 +102,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="py-3.5 px-4 font-medium text-gray-600">
+                                <td class="py-3 px-2.5 font-medium text-gray-600 max-w-[120px] truncate" title="{{ $p->category->name }}">
                                     {{ $p->category->name }}
                                 </td>
-                                <td class="py-3.5 px-4">
+                                <td class="py-3 px-2.5 whitespace-nowrap">
                                     <p class="font-extrabold text-gray-900">
                                         Rp {{ number_format($p->final_price, 0, ',', '.') }}
                                     </p>
@@ -114,10 +115,10 @@
                                         </p>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-4 font-bold {{ $p->stock <= 5 ? 'text-rose-600' : 'text-gray-700' }}">
+                                <td class="py-3 px-2 text-center whitespace-nowrap font-bold {{ $p->stock <= 5 ? 'text-rose-600' : 'text-gray-700' }}">
                                     {{ $p->stock }} unit
                                 </td>
-                                <td class="py-3.5 px-4">
+                                <td class="py-3 px-2 text-center whitespace-nowrap">
                                     <form action="{{ route('seller.products.toggle-active', $p->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="px-2.5 py-1 rounded-full text-[10px] font-extrabold transition {{ $p->is_active ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
@@ -125,8 +126,8 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td class="py-3.5 px-4 text-right">
-                                    <div class="flex items-center justify-end gap-2">
+                                <td class="py-3 px-3 text-right whitespace-nowrap">
+                                    <div class="flex items-center justify-end gap-1.5">
                                         <a href="{{ route('seller.products.edit', $p->id) }}"
                                            class="p-1.5 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition" title="Edit Produk">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>

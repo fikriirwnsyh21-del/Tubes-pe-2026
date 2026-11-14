@@ -82,6 +82,11 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-gray-200 shadow-xs">
         <div>
             <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                <a href="{{ route('home') }}" class="hover:text-emerald-600 flex items-center gap-1 font-medium">
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Beranda</span>
+                </a>
+                <span>/</span>
                 <a href="{{ route('customer.orders.index') }}" class="hover:text-emerald-600">Pesanan Saya</a>
                 <span>/</span>
                 <span class="text-gray-800 font-semibold">{{ $order->order_number }}</span>
@@ -90,8 +95,18 @@
             <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Dipesan pada {{ $order->created_at->format('d F Y, H:i') }} WIB</p>
         </div>
 
-        <div class="flex items-center gap-3">
-            <span class="px-3 py-1 rounded-full text-xs font-black border {{ $order->status_badge_class }}">
+        <div class="flex flex-wrap items-center gap-2.5">
+            <a href="{{ route('home') }}"
+               class="px-3.5 py-2 rounded-xl border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs font-bold shadow-2xs transition inline-flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                <span>Kembali ke Beranda</span>
+            </a>
+            <a href="{{ route('orders.invoice', $order->id) }}" target="_blank"
+               class="px-3.5 py-2 rounded-xl border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs font-bold shadow-2xs transition inline-flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                <span>Cetak Invoice</span>
+            </a>
+            <span class="px-3 py-2 rounded-xl text-xs font-black border {{ $order->status_badge_class }}">
                 {{ $order->status_label }}
             </span>
         </div>
@@ -157,11 +172,40 @@
         @endif
     </div>
 
+    @if($order->status === 'completed')
+        <!-- Celebration Banner for Completed Order -->
+        <div class="bg-gradient-to-r from-emerald-50 via-slate-50 to-emerald-50/60 border border-emerald-200 rounded-3xl p-6 sm:p-7 shadow-xs">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+                <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-md shrink-0">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-gray-900">Pesanan Telah Selesai! Terima Kasih</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Paket perlengkapan gaming Anda telah berhasil diterima. Jangan lupa memberikan rating dan ulasan produk di bawah!</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-3 w-full md:w-auto justify-center md:justify-end">
+                    <a href="{{ route('home') }}"
+                       class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gray-900 hover:bg-black text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        <span>Kembali ke Beranda</span>
+                    </a>
+                    <a href="{{ route('products.index') }}"
+                       class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-bold text-xs sm:text-sm shadow-2xs hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span>Belanja Lagi</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
+
     @if($order->status === 'pending')
         <!-- Realistic Payment Gateway Card -->
         <div class="bg-white rounded-3xl border-2 border-emerald-500/30 overflow-hidden shadow-lg space-y-0 relative">
             <!-- Top Banner with Countdown -->
-            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-800 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="space-y-1">
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-300 animate-ping"></span>
@@ -181,70 +225,37 @@
 
             <!-- Content Body based on payment method -->
             <div class="p-6 sm:p-8">
-                @if($order->payment?->is_qris)
-                    <!-- REALISTIC QRIS COMPONENT -->
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        
-                        <!-- Left: Authentic QRIS Box (5 cols) -->
-                        <div class="lg:col-span-5 flex flex-col items-center">
-                            <div class="w-full max-w-sm bg-white rounded-3xl border-2 border-rose-500 shadow-xl overflow-hidden p-5 flex flex-col items-center text-center relative">
-                                
-                                <!-- QRIS Official Banner Header -->
-                                <div class="w-full flex items-center justify-between pb-3 border-b-2 border-rose-100 mb-3">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="px-2 py-0.5 bg-rose-600 text-white font-black text-xs tracking-tighter rounded">QRIS</span>
-                                        <span class="text-[10px] font-black text-rose-800 uppercase tracking-tight">Pembayaran Nasional</span>
-                                    </div>
-                                    <span class="text-[10px] font-bold text-gray-500 font-mono bg-gray-100 px-1.5 py-0.5 rounded">GPN</span>
-                                </div>
 
-                                <!-- Merchant Name & NMID -->
-                                <div class="mb-3">
-                                    <h3 class="font-black text-sm text-gray-900 tracking-tight">KEBUTUHAN GAMING GEN Z OFFICIAL STORE</h3>
-                                    <p class="text-[10px] text-gray-400 font-mono">NMID: ID1020260920001 • Acquirer: Bank Indonesia</p>
-                                </div>
-
-                                <!-- High-Res QR Code Frame -->
-                                <div class="relative p-3 bg-white rounded-2xl border-2 border-gray-900 shadow-inner flex items-center justify-center">
-                                    <img src="{{ $order->payment?->qris_qr_url }}"
-                                         alt="QRIS Barcode"
-                                         class="w-60 h-60 sm:w-64 sm:h-64 object-contain rounded-lg">
-                                    
-                                    <!-- QRIS Center Logo Overlay -->
-                                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <div class="w-10 h-10 bg-white rounded-xl shadow-md border border-gray-200 flex items-center justify-center p-1">
-                                            <span class="bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded">QRIS</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- QR Caption -->
-                                <p class="text-[11px] font-semibold text-gray-600 mt-3">
-                                    Pindai kode QRIS di atas untuk membayar
-                                </p>
-
-                                <!-- Supported App Logos / Badges -->
-                                <div class="flex flex-wrap items-center justify-center gap-1 mt-3 pt-3 border-t border-gray-100 w-full text-[10px] font-bold text-gray-600">
-                                    <span class="px-1.5 py-0.5 bg-sky-50 text-sky-700 rounded border border-sky-100">GoPay</span>
-                                    <span class="px-1.5 py-0.5 bg-purple-50 text-purple-700 rounded border border-purple-100">OVO</span>
-                                    <span class="px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-100">DANA</span>
-                                    <span class="px-1.5 py-0.5 bg-orange-50 text-orange-700 rounded border border-orange-100">ShopeePay</span>
-                                    <span class="px-1.5 py-0.5 bg-blue-50 text-blue-800 rounded border border-blue-100">BCA</span>
-                                    <span class="px-1.5 py-0.5 bg-amber-50 text-amber-800 rounded border border-amber-100">Livin</span>
-                                    <span class="px-1.5 py-0.5 bg-blue-50 text-blue-900 rounded border border-blue-100">BRImo</span>
-                                </div>
-
-                                <!-- Download QR Button -->
-                                <a href="{{ $order->payment?->qris_qr_url }}" download="QRIS-{{ $order->order_number }}.png" target="_blank"
-                                   class="mt-3 text-xs font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1 hover:underline">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                                    <span>Unduh / Buka Gambar QR</span>
-                                </a>
-                            </div>
+                <!-- Midtrans Snap Official Popup CTA -->
+                <div class="p-5 sm:p-6 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                    <div class="space-y-1 text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400">Midtrans Payment Gateway (Sandbox)</span>
                         </div>
-
-                        <!-- Right: Amount, Transaction ID, Actions & Instructions (7 cols) -->
-                        <div class="lg:col-span-7 space-y-5">
+                        <h3 class="text-base sm:text-lg font-black text-white">Bayar Melalui Pop-up Resmi Midtrans Snap</h3>
+                        <p class="text-xs text-slate-300">
+                            Buka popup resmi Midtrans untuk pembayaran QRIS, E-Wallet, atau Virtual Account. Jika transaksi kadaluarsa, klik tombol perbarui sesi.
+                        </p>
+                    </div>
+                    <div class="shrink-0 flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
+                        <button type="button"
+                                onclick="payWithMidtrans()"
+                                class="w-full sm:w-auto px-5 py-3 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            <span>Buka Pembayaran Midtrans Snap</span>
+                        </button>
+                        <a href="{{ route('orders.show', ['id' => $order->id, 'refresh_token' => 1]) }}"
+                           class="w-full sm:w-auto px-4 py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 hover:text-white font-bold text-xs rounded-xl border border-slate-700 transition flex items-center justify-center gap-1.5"
+                           title="Klik jika Midtrans menampilkan 'Your transaction has expired'">
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                            <span>Perbarui Sesi (Jika Expired)</span>
+                        </a>
+                    </div>
+                </div>
+                @if($order->payment?->is_qris)
+                    <!-- CLEAN PAYMENT & QRIS SECTION (Midtrans Snap) -->
+                    <div class="max-w-3xl mx-auto space-y-5">
                             
                             <!-- Total Amount Card -->
                             <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 space-y-4">
@@ -285,24 +296,35 @@
                             </template>
 
                             <!-- Action Buttons -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <button type="button"
-                                        @click="checkPaymentStatus()"
-                                        :disabled="checkingPayment"
-                                        class="py-3 px-4 rounded-xl border border-gray-300 hover:border-gray-400 bg-white text-gray-800 text-xs font-bold shadow-2xs transition flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-500" :class="{ 'animate-spin': checkingPayment }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                                    <span x-text="checkingPayment ? 'Memeriksa...' : 'Cek Status Pembayaran'">Cek Status Pembayaran</span>
-                                </button>
-
-                                <!-- Instant Pay Simulation (Preserves 'Simulasi Bayar Instan' for tests) -->
-                                <form action="{{ route('orders.pay', $order->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                            class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-md hover:shadow-lg transition flex items-center justify-center gap-1.5">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                        <span>Simulasi Bayar Instan</span>
+                            <div class="space-y-3">
+                                @if(!empty($snapToken) && !str_starts_with($snapToken, 'demo-snap-'))
+                                    <button type="button"
+                                            @click="payWithMidtrans()"
+                                            class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-700 hover:to-indigo-700 text-white text-sm font-black shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                        <span>Buka Popup Midtrans Sandbox Snap</span>
                                     </button>
-                                </form>
+                                @endif
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <button type="button"
+                                            @click="checkPaymentStatus()"
+                                            :disabled="checkingPayment"
+                                            class="py-3 px-4 rounded-xl border border-gray-300 hover:border-gray-400 bg-white text-gray-800 text-xs font-bold shadow-2xs transition flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4 text-gray-500" :class="{ 'animate-spin': checkingPayment }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                        <span x-text="checkingPayment ? 'Memeriksa...' : 'Cek Status Pembayaran'">Cek Status Pembayaran</span>
+                                    </button>
+
+                                    <!-- Instant Pay Simulation (Preserves 'Simulasi Bayar Instan' for tests) -->
+                                    <form action="{{ route('orders.pay', $order->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                                class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-md hover:shadow-lg transition flex items-center justify-center gap-1.5">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                            <span>Simulasi Bayar Instan</span>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
 
                             <!-- Step-by-Step Accordion -->
@@ -322,7 +344,7 @@
                                             <li>Buka aplikasi <strong>Gojek</strong> atau <strong>Tokopedia</strong> di smartphone Anda.</li>
                                             <li>Klik menu <strong>Bayar / Scan</strong> pada halaman utama.</li>
                                             <li>Arahkan kamera ke kode QRIS di samping layar ini.</li>
-                                            <li>Periksa nama merchant <strong>KEBUTUHAN GAMING GEN Z</strong> dan jumlah nominal tagihan.</li>
+                                            <li>Periksa nama merchant <strong>SETUP PEDIA</strong> dan jumlah nominal tagihan.</li>
                                             <li>Masukkan PIN GoPay Anda untuk mengonfirmasi pembayaran.</li>
                                         </ol>
                                     </div>
@@ -338,7 +360,7 @@
                                         <ol class="list-decimal list-inside space-y-1">
                                             <li>Buka aplikasi <strong>BCA Mobile</strong> dan login ke <strong>m-BCA</strong>.</li>
                                             <li>Pilih tombol <strong>QRIS</strong> di bagian tengah menu navigasi bawah.</li>
-                                            <li>Pindai barcode QRIS Kebutuhan Gaming Gen Z di atas.</li>
+                                            <li>Pindai barcode QRIS SetUp Pedia di atas.</li>
                                             <li>Pastikan nominal pembayaran sesuai dengan total belanja.</li>
                                             <li>Masukkan <strong>PIN m-BCA</strong> Anda. Transaksi selesai!</li>
                                         </ol>
@@ -377,7 +399,6 @@
                                 </div>
                             </div>
 
-                        </div>
                     </div>
 
                 @elseif($order->payment?->is_virtual_account)
@@ -773,14 +794,35 @@
                         </button>
                     </form>
                 @elseif($order->status === 'completed')
-                    <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-center">
+                    <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-center space-y-3">
                         <div class="flex items-center justify-center gap-1.5 font-bold text-sm text-emerald-700">
                             <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>Pesanan Telah Selesai</span>
                         </div>
-                        <p class="text-xs text-emerald-600 mt-1 font-medium">Seluruh perjalanan pesanan telah selesai. Terima kasih telah berbelanja!</p>
+                        <p class="text-xs text-emerald-600 font-medium">Seluruh perjalanan pesanan telah selesai. Terima kasih telah berbelanja!</p>
+
+                        <div class="pt-1 flex flex-col gap-2">
+                            <a href="{{ route('home') }}"
+                               class="w-full py-3 bg-gray-900 hover:bg-black text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                <span>Kembali ke Beranda</span>
+                            </a>
+                            <a href="{{ route('products.index') }}"
+                               class="w-full py-2.5 border border-gray-300 hover:border-gray-400 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs rounded-xl shadow-2xs transition flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                <span>Belanja Produk Lain</span>
+                            </a>
+                        </div>
                     </div>
                 @endif
+            </div>
+
+            <!-- Global Back to Home Link in Card Footer -->
+            <div class="pt-3 border-t border-gray-100 text-center">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-emerald-600 transition">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span>Kembali ke Beranda Utama</span>
+                </a>
             </div>
 
         </div>
@@ -867,3 +909,50 @@
 
 </div>
 @endsection
+
+@push('scripts')
+@if($order->status === 'pending')
+    <script src="{{ ($isProduction ?? false) ? 'https://app.midtrans.com/snap/snap.js' : 'https://app.sandbox.midtrans.com/snap/snap.js' }}" data-client-key="{{ $clientKey ?? config('services.midtrans.client_key') }}"></script>
+    <script>
+        function payWithMidtrans() {
+            @if(!empty($snapToken) && !str_starts_with($snapToken, 'demo-snap-'))
+                if (typeof snap !== 'undefined') {
+                    snap.pay('{{ $snapToken }}', {
+                        onSuccess: function(result) {
+                            console.log('Midtrans payment success:', result);
+                            window.location.href = "{{ route('orders.finish') }}?order_id=" + encodeURIComponent(result.order_id || '{{ $order->order_number }}') + "&status_code=200&transaction_status=settlement";
+                        },
+                        onPending: function(result) {
+                            console.log('Midtrans payment pending:', result);
+                            window.location.reload();
+                        },
+                        onError: function(result) {
+                            console.log('Midtrans payment error:', result);
+                            if (confirm('Sesi transaksi Midtrans telah kadaluarsa atau terjadi kendala. Apakah Anda ingin memperbarui sesi transaksi sekarang?')) {
+                                window.location.href = "{{ route('orders.show', ['id' => $order->id, 'refresh_token' => 1]) }}";
+                            }
+                        },
+                        onClose: function() {
+                            console.log('Popup ditutup sebelum pembayaran selesai');
+                        }
+                    });
+                } else {
+                    alert('Midtrans Snap SDK sedang dimuat. Silakan coba kembali dalam beberapa detik.');
+                }
+            @else
+                alert('Token Midtrans Snap sedang dalam mode simulasi sandbox. Anda dapat menggunakan tombol "Simulasi Bayar Instan" di bawah untuk menguji alur pembayaran hingga lunas.');
+            @endif
+        }
+
+        @if(!empty($snapToken) && !str_starts_with($snapToken, 'demo-snap-') && request()->boolean('auto_pay'))
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                if (typeof snap !== 'undefined') {
+                    payWithMidtrans();
+                }
+            }, 600);
+        });
+        @endif
+    </script>
+@endif
+@endpush

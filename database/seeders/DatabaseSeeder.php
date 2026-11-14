@@ -31,30 +31,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Roles
+        // 1. Roles (Hanya 2 Role: Admin & Pelanggan sesuai ketentuan)
         $adminRole = Role::firstOrCreate(['slug' => 'admin'], ['name' => 'Admin']);
-        $sellerRole = Role::firstOrCreate(['slug' => 'seller'], ['name' => 'Seller']);
-        $customerRole = Role::firstOrCreate(['slug' => 'customer'], ['name' => 'Customer']);
+        $customerRole = Role::firstOrCreate(['slug' => 'customer'], ['name' => 'Pelanggan']);
 
         // 2. Default Accounts
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
                 'role_id' => $adminRole->id,
-                'name' => 'Platform Administrator',
+                'name' => 'Administrator Toko',
                 'phone' => '081200000001',
-                'password' => Hash::make('password'),
-                'is_active' => true,
-                'email_verified_at' => now(),
-            ]
-        );
-
-        $sellerUser1 = User::firstOrCreate(
-            ['email' => 'seller@example.com'],
-            [
-                'role_id' => $sellerRole->id,
-                'name' => 'ASUS ROG Official Partner',
-                'phone' => '081200000002',
                 'password' => Hash::make('password'),
                 'is_active' => true,
                 'email_verified_at' => now(),
@@ -73,7 +60,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 4 additional tech & gaming sellers
+        // 4 additional staff / brand managers (all under Admin role)
         $sellerNames = [
             'Razer Flagship Store',
             'GeForce & AMD PC Master',
@@ -86,7 +73,7 @@ class DatabaseSeeder extends Seeder
             $otherSellers[] = User::firstOrCreate(
                 ['email' => $sellerEmails[$i]],
                 [
-                    'role_id' => $sellerRole->id,
+                    'role_id' => $adminRole->id,
                     'name' => $sellerNames[$i],
                     'phone' => '08120000001'.($i + 4),
                     'password' => Hash::make('password'),
@@ -123,14 +110,14 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 4. Tech & Gaming Shops
+        // 4. Tech & Gaming Shops (Managed by Admin)
         $shopData = [
             [
-                'user_id' => $sellerUser1->id,
-                'name' => 'Kebutuhan Gaming Gen Z (Official Store)',
-                'slug' => 'kebutuhan-gaming-gen-z',
+                'user_id' => $admin->id,
+                'name' => 'SetUp Pedia Official Store',
+                'slug' => 'setuppedia-official',
                 'city' => 'Jakarta Pusat',
-                'description' => 'Flagship Store resmi Kebutuhan Gaming Gen Z. Pusat terlengkap laptop gaming flagship, komponen PC rakitan enthusiast, monitor 240Hz, keyboard mechanical kustom, dan konsol original bergaransi resmi Indonesia.',
+                'description' => 'Flagship Store resmi SetUp Pedia. Pusat terlengkap laptop gaming flagship, komponen PC, monitor, keyboard mechanical, dan perlengkapan setup original bergaransi resmi.',
                 'rating' => 4.98,
                 'followers_count' => 54200,
                 'is_active' => true,
@@ -2947,7 +2934,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'title' => 'PlayStation 5 Slim & Handheld Console Hub Resmi Indonesia',
-                'image_path' => 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&auto=format&fit=crop&q=80',
+                'image_path' => 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=1920&auto=format&fit=crop&q=85',
                 'target_url' => '/products?category=konsol-handheld',
                 'position' => 'hero',
                 'sort_order' => 3,

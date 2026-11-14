@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'midtrans' => [
+        'server_key' => env('MIDTRANS_SERVER_KEY', 'SB-Mid-server-default-sandbox-key'),
+        'client_key' => env('MIDTRANS_CLIENT_KEY', 'SB-Mid-client-default-sandbox-key'),
+        'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
+        'is_sanitized' => true,
+        'is_3ds' => true,
+    ],
+
 ];

@@ -6,13 +6,18 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CheckoutController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\MidtransCallbackController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| REST API Routes - PasarKeren Marketplace (v1)
+| REST API Routes - E-Commerce
 |--------------------------------------------------------------------------
 */
+
+// Midtrans Webhook Callback
+Route::post('/midtrans/callback', [MidtransCallbackController::class, 'handle']);
+
 
 Route::prefix('v1')->group(function () {
 

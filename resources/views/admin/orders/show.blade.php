@@ -110,7 +110,6 @@
                              class="w-12 h-12 rounded-xl object-cover border border-slate-100 shrink-0">
                         <div>
                             <h4 class="font-bold text-xs sm:text-sm text-slate-900">{{ $item->product_name }}</h4>
-                            <p class="text-[11px] text-emerald-600 font-semibold">Toko: {{ $item->shop->name ?? '-' }}</p>
                             @if($item->variant_name)
                                 <p class="text-[10px] text-slate-500">Varian: {{ $item->variant_name }}</p>
                             @endif
@@ -123,6 +122,51 @@
                 </div>
             @endforeach
         </div>
+    </div>
+
+    <!-- Update Operational Status Card (Spec: Memperbarui status pemrosesan dan pengiriman) -->
+    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+            <div>
+                <h3 class="font-black text-slate-900 text-sm">Kelola Status Pemrosesan & Pengiriman</h3>
+                <p class="text-xs text-slate-500">Status pembayaran Midtrans diverifikasi otomatis dan dijaga dari perubahan manual sembarangan.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold border {{ $order->status_badge_class }}">
+                Status Saat Ini: {{ $order->status_label }}
+            </span>
+        </div>
+
+        <form action="{{ route('admin.orders.update-status', $order->id) }}" method="POST" class="space-y-4" x-data="{ selectedStatus: '{{ $order->status }}' }">
+            @csrf
+            @method('PUT')
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Ubah Status Pemrosesan</label>
+                    <select name="status" x-model="selectedStatus" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-250 bg-slate-50 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 font-semibold">
+                        <option value="pending" {{ $order->status === 'pending' ? 'selected' : '' }}>Menunggu Pembayaran (Pending)</option>
+                        <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>Sedang Diproses (Processing)</option>
+                        <option value="shipped" {{ $order->status === 'shipped' ? 'selected' : '' }}>Sedang Dikirim (Shipped)</option>
+                        <option value="delivered" {{ $order->status === 'delivered' ? 'selected' : '' }}>Telah Terkirim / Sampai (Delivered)</option>
+                        <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Pesanan Selesai (Completed)</option>
+                        <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Dibatalkan (Cancelled)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Nomor Resi Pengiriman (Opsional / Kurir)</label>
+                    <input type="text" name="tracking_number" value="{{ old('tracking_number', $order->tracking_number ?? '') }}" placeholder="Contoh: JNE8829102910"
+                           class="w-full px-3.5 py-2.5 rounded-xl border border-slate-250 bg-slate-50 text-xs sm:text-sm text-slate-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end pt-2">
+                <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>Perbarui Status Pesanan</span>
+                </button>
+            </div>
+        </form>
     </div>
 
 </div>

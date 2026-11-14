@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Kebutuhan Gaming Gen Z') - Tempatnya Gear Gaming & Tech Original</title>
-    <meta name="description" content="@yield('meta_description', 'Pusat belanja online spesialis gear gaming, laptop gaming RTX, komponen PC rakitan, monitor 240Hz, keyboard mechanical, konsol PS5, dan aksesoris elektronik terbaik di Kebutuhan Gaming Gen Z.')">
+    <title>@yield('title', 'SetUp Pedia') - Pusat Belanja Setup Gaming & Komputer Terlengkap</title>
+    <meta name="description" content="@yield('meta_description', 'Pusat belanja online spesialis gear gaming, laptop gaming RTX, komponen PC rakitan, monitor 240Hz, keyboard mechanical, konsol PS5, dan aksesoris elektronik terbaik di SetUp Pedia.')">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="@yield('title', 'Kebutuhan Gaming Gen Z')">
-    <meta property="og:description" content="@yield('meta_description', 'Pusat Belanja Online Gear Gaming & Tech Spesialis Gen Z Terpercaya')">
+    <meta property="og:title" content="@yield('title', 'SetUp Pedia')">
+    <meta property="og:description" content="@yield('meta_description', 'Pusat Belanja Setup Gaming & Tech Spesialis Terpercaya')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
 
@@ -31,259 +31,362 @@
           selectedCategory: '{{ request('category') }}',
           autocompleteOpen: false,
           suggestions: [
-              'ASUS ROG Zephyrus G16',
-              'GeForce RTX 4090 Rog Strix',
-              'AMD Ryzen 7 7800X3D',
-              'Wooting 60HE+ Rapid Trigger',
-              'Logitech G PRO X Superlight 2',
+              'Monitor Gaming 240Hz OLED',
+              'Mouse Gaming Ultralight',
+              'Meja Setup & Standing Desk',
+              'Keyboard Mechanical Rapid Trigger',
+              'Laptop Gaming RTX 4080',
+              'Laptop Budget 4 Jutaan',
+              'Laptop Lenovo Ryzen 3',
+              'Laptop ASUS Vivobook',
+              'Laptop Acer Aspire Slim',
+              'PC Rakitan Gaming Ready',
               'PlayStation 5 Pro Digital',
               'Steam Deck OLED 512GB',
-              'Samsung Odyssey OLED G8 240Hz',
-              'Moondrop Blessing 3 IEM',
-              'Elgato Stream Deck MK.2',
-              'Secretlab TITAN Evo',
-              'Logitech G923 TrueForce Racing',
-              'Corsair Dominator Titanium DDR5',
-              'Kingston KC3000 PCIe 4.0 SSD',
-              'PC Rakitan RTX 4080 Super',
-              'Lian Li O11 Dynamic EVO'
+              'AMD Ryzen 7 7800X3D',
+              'GeForce RTX 4090 Rog Strix',
+              'ASUS ROG Zephyrus G16',
+              'Wooting 60HE+ Rapid Trigger',
+              'Logitech G PRO X Superlight 2',
+              'Samsung Odyssey OLED G8',
+              'Headset 7.1 Surround & IEM',
+              'Kursi Gaming Ergonomis',
+              'SSD NVMe Gen4 2TB',
+              'RAM DDR5 32GB 6000MHz',
+              'Cooler AIO 360mm RGB',
+              'Elgato Stream Deck MK.2'
           ]
       }">
-
-    <!-- Top Notice Bar (Sleek Dark Slate with Emerald & Amber Highlights) -->
-    <div class="bg-slate-950 text-slate-300 text-[11px] py-1.5 px-4 hidden md:block border-b border-slate-800/80">
-        <div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5 text-emerald-400 font-extrabold tracking-tight">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Kebutuhan Gaming Gen Z Official Store
-                </span>
-                <span class="text-slate-700">•</span>
-                <span class="text-slate-300 font-medium">100% Produk Original & Bergaransi Distributor Resmi</span>
-                <span class="text-slate-700">•</span>
-                <span class="text-amber-400 font-semibold flex items-center gap-1">
-                    <span>⚡ Bebas Ongkir & Packing Kayu Aman</span>
-                </span>
-            </div>
-            <div class="flex items-center gap-3.5">
-                <a href="{{ route('products.index', ['filter' => 'flash_sale']) }}" class="hover:text-rose-400 text-rose-300 font-semibold transition flex items-center gap-1">
-                    <span>🔥 Flash Sale</span>
-                </a>
-                <span class="text-slate-700">•</span>
-                <a href="{{ route('products.index', ['q' => 'PC Rakitan']) }}" class="hover:text-emerald-400 transition flex items-center gap-1">
-                    <span>🛠️ Rakit PC</span>
-                </a>
-                <span class="text-slate-700">•</span>
-                <a href="{{ route('products.index', ['q' => 'Voucher']) }}" class="hover:text-amber-300 text-amber-300 font-medium transition flex items-center gap-1">
-                    <span>🎟️ Voucher 150K</span>
-                </a>
-                <span class="text-slate-700">•</span>
-                <a href="{{ route('products.index') }}" class="hover:text-emerald-400 transition">Semua Gear</a>
-                <span class="text-slate-700">•</span>
-                <a href="#" class="hover:text-emerald-400 transition">Pusat Garansi & FAQ</a>
-                @auth
-                    @if(auth()->user()->isSeller())
-                        <span class="text-slate-700">•</span>
-                        <a href="{{ route('seller.dashboard') }}" class="text-emerald-400 font-bold hover:underline">Seller Center</a>
-                    @elseif(auth()->user()->isCustomer())
-                        <span class="text-slate-700">•</span>
-                        <a href="{{ route('register') }}?seller=1" class="text-emerald-400 font-semibold hover:underline">Buka Toko Official</a>
-                    @endif
-                @else
-                    <span class="text-slate-700">•</span>
-                    <a href="{{ route('register') }}?seller=1" class="text-emerald-400 font-semibold hover:underline">Buka Toko Gratis</a>
-                @endauth
-            </div>
-        </div>
-    </div>
 
     <!-- Sticky Main Header (Clean Modern Glassmorphism & High Contrast) -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
         <div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
             
-            <!-- Row 1: Logo, Search, Actions -->
-            <div class="flex items-center justify-between h-16 sm:h-20 gap-3 sm:gap-6">
+            <!-- Row 1: Logo, Nav Links, Search, Actions -->
+            <div class="flex items-center justify-between h-20 sm:h-24 lg:h-[92px] gap-3 sm:gap-6">
                 
                 <!-- Left: Mobile Hamburger Button -->
                 <button @click="mobileMenuOpen = true"
                         type="button"
-                        class="md:hidden p-2 text-slate-700 hover:text-emerald-600 rounded-xl hover:bg-slate-100 transition"
+                        class="md:hidden p-2.5 text-slate-700 hover:text-emerald-600 rounded-2xl hover:bg-slate-100 transition"
                         title="Buka Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
 
-                <!-- Logo Brand -->
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5 shrink-0 group">
-                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 via-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-xl shadow-sm group-hover:scale-105 transition-transform">
-                        🎮
+                <!-- Clean Brand Logo (Bigger & Impactful) -->
+                <a href="{{ route('home') }}" class="flex items-center gap-3.5 shrink-0 group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                     </div>
                     <div class="flex flex-col">
-                        <div class="flex items-center gap-1.5">
-                            <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900 leading-none">
-                                Kebutuhan<span class="text-emerald-500">Gaming</span>
-                            </span>
-                            <span class="px-1.5 py-0.5 bg-emerald-500 text-white font-black text-[9px] rounded-md tracking-wider uppercase shadow-2xs">Gen Z</span>
-                        </div>
-                        <span class="text-[9px] text-slate-400 font-bold tracking-widest uppercase mt-0.5">Gaming Gear & Tech Specialist</span>
+                        <span class="font-black text-2xl sm:text-3xl tracking-tight text-slate-900 leading-none">
+                            SetUp<span class="text-emerald-600">Pedia</span>
+                        </span>
+                        <span class="text-[11px] sm:text-xs text-slate-400 font-extrabold tracking-wider uppercase mt-1">Gaming & Tech Setup</span>
                     </div>
                 </a>
 
-                <!-- Category Button & Expanded 4-Column Mega Menu -->
+                <!-- Category Button & Expanded 5-Column Mega Menu -->
                 <div class="relative hidden lg:block" @click.outside="categoryDropdownOpen = false">
                     <button @click="categoryDropdownOpen = !categoryDropdownOpen"
                             type="button"
-                            class="flex items-center gap-2 px-3.5 py-2.5 text-xs font-bold text-slate-700 hover:text-emerald-600 rounded-xl hover:bg-emerald-50/60 border border-slate-200/90 transition shadow-2xs">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            class="flex items-center gap-2.5 px-4.5 py-3 text-sm sm:text-base font-extrabold text-slate-800 hover:text-emerald-600 rounded-2xl hover:bg-emerald-50/70 border border-slate-200 transition shadow-xs">
+                        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                         <span>Semua Kategori</span>
-                        <svg class="w-3.5 h-3.5 transition-transform duration-200 text-slate-400" :class="{'rotate-180': categoryDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        <svg class="w-4 h-4 transition-transform duration-200 text-slate-400" :class="{'rotate-180': categoryDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
 
-                    <!-- Clean 5-Column Mega Menu Dropdown -->
+                    <!-- Simple & Clear Category Dropdown Menu (Sage Green & Putih Abu Edition) -->
                     <div x-show="categoryDropdownOpen" x-cloak
                          x-transition:enter="transition ease-out duration-150"
-                         x-transition:enter-start="opacity-0 scale-98"
-                         x-transition:enter-end="opacity-100 scale-100"
-                         class="absolute top-full left-0 mt-2 w-[1040px] xl:w-[1140px] 2xl:w-[1240px] max-w-[calc(100vw-2rem)] bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 z-50">
-                        <div class="grid grid-cols-5 gap-4 xl:gap-5">
+                         x-transition:enter-start="opacity-0 translate-y-1 scale-98"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         class="absolute top-full left-0 z-50 bg-white rounded-3xl shadow-2xl border border-slate-200"
+                         style="width: 890px !important; min-width: 890px !important; max-width: calc(100vw - 2rem) !important; margin-top: 10px; padding: 22px 24px; box-sizing: border-box !important;">
+                        
+                        <!-- Top Sub-header inside Dropdown -->
+                        <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-100" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px;">
+                                <span class="w-2.5 h-2.5 rounded-full" style="display: inline-block; width: 10px; height: 10px; border-radius: 9999px; background-color: #507159;"></span>
+                                <span style="font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; color: #1e2821;">Katalog Gear & Komponen Setup</span>
+                            </div>
+                            <span style="font-size: 11px; font-weight: 800; color: #2d4434; background-color: #e2ede5; border: 1px solid #c5d8cb; padding: 3px 12px; border-radius: 9999px;">
+                                15 Kategori Resmi
+                            </span>
+                        </div>
+
+                        <!-- 3-Column Grid with Sage Green & Putih Abu Theme -->
+                        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
                             
-                            <!-- Col 1: Sistem, Laptop & PC -->
-                            <div class="border-r border-slate-100 pr-3">
-                                <div class="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                                    <span>💻 Sistem & PC Rakitan</span>
+                            <!-- Kolom 1: Komputer & Sistem -->
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 2px solid #507159;">
+                                    <span style="font-size: 12px; font-weight: 900; color: #1e2821; text-transform: uppercase; letter-spacing: 0.05em;">Komputer & Sistem</span>
+                                    <span style="font-size: 10px; font-weight: 800; color: #2d4434; background: #e2ede5; border: 1px solid #c5d8cb; padding: 2px 7px; border-radius: 6px;">5 Kategori</span>
                                 </div>
-                                <div class="space-y-1">
-                                    <a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Laptop Gaming RTX
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        PC Rakitan Gaming Ready
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'pc-komponen']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Komponen PC & Motherboard
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'GeForce RTX']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Kartu Grafis RTX 40 Series
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'Ryzen 7']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Processor AMD & Intel
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="block p-2 rounded-xl bg-emerald-50/80 border border-emerald-100 text-[11px] font-bold text-emerald-800 hover:bg-emerald-100/70 transition mt-2">
-                                        ⚡ Simulasi Rakit PC Gratis
-                                    </a>
-                                </div>
-                            </div>
 
-                            <!-- Col 2: Storage & Power Cooling -->
-                            <div class="border-r border-slate-100 pr-3">
-                                <div class="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                                    <span>⚡ Storage & Hardware</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <a href="{{ route('products.index', ['category' => 'ram-ssd-storage']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        RAM DDR5 & SSD NVMe
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'cooling-power-supply']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        AIO Cooler & PSU 80+
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'KC3000']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        SSD PCIe 4.0 Super Cepat
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'Dominator']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        RAM DDR5 6000MHz RGB
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'Kraken']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Liquid AIO dengan LCD
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'ram-ssd-storage']) }}" class="block p-2 rounded-xl bg-teal-50/80 border border-teal-100 text-[11px] font-bold text-teal-800 hover:bg-teal-100/70 transition mt-2">
-                                        🚀 Upgrade Speed NVMe SSD
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Col 3: Peripheral & Esports Pro -->
-                            <div class="border-r border-slate-100 pr-3">
-                                <div class="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                                    <span>⌨️ Periferal Esports</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Keyboard Rapid Trigger & Custom
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Mouse Ultralight 4K/8K Hz
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Monitor 240Hz & OLED 0.03ms
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'audio-headset']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Headset 7.1 & IEM Audiophile
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'aksesoris-gaming']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Mousepad, Switch & Modding
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'Wooting']) }}" class="block p-2 rounded-xl bg-indigo-50/80 border border-indigo-100 text-[11px] font-bold text-indigo-800 hover:bg-indigo-100/70 transition mt-2">
-                                        🏆 Gear Standar Turnamen
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Col 4: Konsol, Handheld & Setup -->
-                            <div class="border-r border-slate-100 pr-3">
-                                <div class="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                                    <span>🎮 Konsol & Room Setup</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <a href="{{ route('products.index', ['category' => 'konsol-handheld']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        PlayStation 5 & PC Handheld
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'smartphone-gaming']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        HP Gaming ROG & Cooler
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'streaming-gear']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Elgato Stream Deck & Mic XLR
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'racing-sim-vr']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Racing Sim Wheel & VR Headset
-                                    </a>
-                                    <a href="{{ route('products.index', ['category' => 'kursi-setup-meja']) }}" class="block px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                        Kursi Gaming & Meja Elektrik
-                                    </a>
-                                    <a href="{{ route('products.index', ['q' => 'G923']) }}" class="block p-2 rounded-xl bg-amber-50/80 border border-amber-100 text-[11px] font-bold text-amber-800 hover:bg-amber-100/70 transition mt-2">
-                                        🏎️ Sim Racing Kokpit Imersif
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Col 5: Brand Partner & Voucher Promo -->
-                            <div class="flex flex-col justify-between">
-                                <div>
-                                    <div class="text-[11px] font-black text-slate-400 uppercase tracking-wider mb-2.5">
-                                        Brand Partner Resmi
+                                <!-- 1. Laptop Gaming -->
+                                <a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                     </div>
-                                    <div class="grid grid-cols-2 gap-1 text-[9px] font-bold text-slate-600 mb-3">
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">ASUS ROG</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">Razer</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">GeForce</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">PS5 Pro</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">Logitech</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">Corsair</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">Steam Deck</span>
-                                        <span class="p-1 bg-slate-50 border border-slate-100 rounded text-center">Elgato</span>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Laptop Gaming</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">RTX 40 Series & OLED</span>
                                     </div>
+                                </a>
+
+                                <!-- 2. PC Rakitan -->
+                                <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm3 4h.01M8 12h.01M16 8h.01M16 12h.01M8 16h8"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">PC Rakitan</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Gaming Ready & Editing</span>
+                                    </div>
+                                </a>
+
+                                <!-- 3. Komponen PC -->
+                                <a href="{{ route('products.index', ['category' => 'pc-komponen']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2zm2 4h6v6H9V9z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Komponen PC</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">GPU, CPU & Mobo</span>
+                                    </div>
+                                </a>
+
+                                <!-- 4. Storage RAM & SSD -->
+                                <a href="{{ route('products.index', ['category' => 'ram-ssd-storage']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Storage RAM & SSD</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">NVMe Gen4 & DDR5</span>
+                                    </div>
+                                </a>
+
+                                <!-- 5. Cooling & PSU -->
+                                <a href="{{ route('products.index', ['category' => 'cooling-power-supply']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Cooling & PSU</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Liquid AIO & 80+ Gold</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Kolom 2: Periferal Gaming -->
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 2px solid #507159;">
+                                    <span style="font-size: 12px; font-weight: 900; color: #1e2821; text-transform: uppercase; letter-spacing: 0.05em;">Periferal Gaming</span>
+                                    <span style="font-size: 10px; font-weight: 800; color: #2d4434; background: #e2ede5; border: 1px solid #c5d8cb; padding: 2px 7px; border-radius: 6px;">5 Kategori</span>
                                 </div>
 
-                                <div class="p-3 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl text-white shadow-md">
-                                    <span class="text-[9px] font-black uppercase tracking-wider bg-white/20 px-1.5 py-0.5 rounded">VOUCHER GEN Z</span>
-                                    <p class="text-xs font-black mt-1.5">Klaim Diskon 150K</p>
-                                    <p class="text-[10px] text-emerald-100 mt-0.5">Kode: <strong class="font-mono text-white underline">GAMERSEJATI</strong></p>
+                                <!-- 6. Keyboard Mechanical -->
+                                <a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2zm3 4h.01M10 10h.01M14 10h.01M17 10h.01M7 14h10"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Keyboard Mechanical</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Rapid Trigger & Custom</span>
+                                    </div>
+                                </a>
+
+                                <!-- 7. Mouse Gaming -->
+                                <a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3a6 6 0 00-6 6v6a6 6 0 0012 0V9a6 6 0 00-6-6zm0 0v5"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Mouse Gaming</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Ultralight 4K/8K Hz</span>
+                                    </div>
+                                </a>
+
+                                <!-- 8. Monitor Gaming -->
+                                <a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 5h18a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Monitor Gaming</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">240Hz, 4K & OLED</span>
+                                    </div>
+                                </a>
+
+                                <!-- 9. Audio & Headset -->
+                                <a href="{{ route('products.index', ['category' => 'audio-headset']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h1a2 2 0 002-2v-4a2 2 0 00-2-2H4a1 1 0 00-1 1v4zm18 0a3 3 0 01-3 3h-1a2 2 0 01-2-2v-4a2 2 0 012-2h3a1 1 0 011 1v4z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Audio & Headset</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">7.1 Surround & IEM</span>
+                                    </div>
+                                </a>
+
+                                <!-- 10. Aksesoris & Modding -->
+                                <a href="{{ route('products.index', ['category' => 'aksesoris-gaming']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Aksesoris & Modding</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Deskmat, Switch & Kabel</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Kolom 3: Setup & Entertainment -->
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 2px solid #507159;">
+                                    <span style="font-size: 12px; font-weight: 900; color: #1e2821; text-transform: uppercase; letter-spacing: 0.05em;">Konsol & Setup Room</span>
+                                    <span style="font-size: 10px; font-weight: 800; color: #2d4434; background: #e2ede5; border: 1px solid #c5d8cb; padding: 2px 7px; border-radius: 6px;">5 Kategori</span>
                                 </div>
+
+                                <!-- 11. Konsol & Handheld -->
+                                <a href="{{ route('products.index', ['category' => 'konsol-handheld']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 10h.01M17 12h.01M7 10h4M9 8v4M6.5 19l1.8-6.3A3 3 0 0111.2 10h1.6a3 3 0 012.9 2.7L17.5 19a2 2 0 01-3.4 1.4l-1.3-1.4h-1.6l-1.3 1.4A2 2 0 016.5 19z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Konsol & Handheld</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">PS5 & Steam Deck</span>
+                                    </div>
+                                </a>
+
+                                <!-- 12. Smartphone Gaming -->
+                                <a href="{{ route('products.index', ['category' => 'smartphone-gaming']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Smartphone Gaming</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">ROG Phone & Cooler</span>
+                                    </div>
+                                </a>
+
+                                <!-- 13. Streaming Gear -->
+                                <a href="{{ route('products.index', ['category' => 'streaming-gear']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Streaming Gear</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Elgato & Mic XLR</span>
+                                    </div>
+                                </a>
+
+                                <!-- 14. Kursi & Meja Setup -->
+                                <a href="{{ route('products.index', ['category' => 'kursi-setup-meja']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 3v10a4 4 0 004 4h6a4 4 0 004-4V3M12 17v4m-4 0h8M9 7h6"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Kursi & Meja Setup</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Ergonomis & Desk</span>
+                                    </div>
+                                </a>
+
+                                <!-- 15. Racing Sim & VR -->
+                                <a href="{{ route('products.index', ['category' => 'racing-sim-vr']) }}" 
+                                   class="group transition" 
+                                   style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; text-decoration: none; background: transparent;"
+                                   onmouseover="this.style.background='#eef3ef'; this.querySelector('.cat-icon').style.background='#507159'; this.querySelector('.cat-icon svg').style.color='#ffffff'; this.querySelector('.cat-icon').style.borderColor='#507159';" 
+                                   onmouseout="this.style.background='transparent'; this.querySelector('.cat-icon').style.background='#edf1ee'; this.querySelector('.cat-icon svg').style.color='#507159'; this.querySelector('.cat-icon').style.borderColor='#dce3de';">
+                                    <div class="cat-icon transition" style="width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #edf1ee; border: 1px solid #dce3de; display: flex; align-items: center; justify-content: center;">
+                                        <svg style="width: 20px; height: 20px; color: #507159;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0v-6m-6-3h6m6 0h-6"/></svg>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-size: 13px; font-weight: 800; color: #1e2821; line-height: 1.25;">Racing Sim & VR</span>
+                                        <span style="font-size: 11px; font-weight: 500; color: #607267; margin-top: 2px;">Direct Drive & Kokpit</span>
+                                    </div>
+                                </a>
                             </div>
 
                         </div>
+
+                        <!-- Clean Minimalist Footer (Sage Green & Putih Abu) -->
+                        <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #edf1ee; display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: #607267;">
+                                <svg style="width: 16px; height: 16px; color: #507159; shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                <span>Semua produk 100% original & bergaransi resmi distributor Indonesia.</span>
+                            </div>
+                            <a href="{{ route('products.index') }}" 
+                               style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #ffffff; text-decoration: none; padding: 7px 16px; background: #507159; border-radius: 10px; border: 1px solid #507159; transition: all 0.2s;"
+                               onmouseover="this.style.background='#3d5744'; this.style.borderColor='#3d5744';" onmouseout="this.style.background='#507159'; this.style.borderColor='#507159';">
+                                <span>Buka Katalog Lengkap</span>
+                                <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Modern Clean Search Bar with Autocomplete & Quick Tags -->
+                <!-- Modern Clean Search Bar with Autocomplete & Quick Tags (Bigger & Clearer) -->
                 <div class="flex-1 max-w-3xl xl:max-w-4xl 2xl:max-w-5xl relative" @click.outside="autocompleteOpen = false">
                     <form action="{{ route('products.index') }}" method="GET" class="relative flex items-center">
                         <div class="relative w-full flex items-center">
@@ -291,101 +394,117 @@
                                    name="q"
                                    x-model="searchQuery"
                                    @focus="autocompleteOpen = true"
+                                   @keydown.escape="autocompleteOpen = false"
+                                   autocomplete="off"
+                                   autocorrect="off"
+                                   autocapitalize="off"
+                                   spellcheck="false"
                                    placeholder="Cari laptop gaming RTX, keyboard mechanical, monitor 240Hz, PS5..."
-                                   class="w-full pl-4 pr-12 py-2.5 sm:py-2.5 bg-slate-50 hover:bg-slate-100/60 focus:bg-white text-xs sm:text-sm text-slate-900 rounded-xl border border-slate-250 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition outline-hidden shadow-2xs">
+                                   class="w-full pl-5 pr-16 py-3 sm:py-3.5 bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-sm sm:text-base text-slate-900 rounded-2xl border-2 border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition outline-hidden shadow-xs placeholder:text-slate-400 font-medium">
                             
                             <button type="submit"
-                                    class="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg flex items-center justify-center transition shadow-2xs"
+                                    class="absolute right-2 top-2 bottom-2 px-4 sm:px-5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl flex items-center justify-center transition shadow-xs cursor-pointer"
                                     title="Cari">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                             </button>
                         </div>
                     </form>
 
                     <!-- Autocomplete Suggestions Dropdown -->
-                    <div x-show="autocompleteOpen && searchQuery.length > 0" x-cloak
-                         class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50">
-                        <div class="px-4 py-1.5 text-xs text-slate-400 font-bold uppercase tracking-wider">
-                            Rekomendasi Pencarian Gear
-                        </div>
-                        <template x-for="item in suggestions.filter(s => s.toLowerCase().includes(searchQuery.toLowerCase()))" :key="item">
-                            <a :href="'{{ route('products.index') }}?q=' + encodeURIComponent(item)"
-                                class="flex items-center gap-3 px-4 py-2.5 text-xs sm:text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">
-                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                                <span x-text="item"></span>
-                            </a>
-                        </template>
-                    </div>
+                    <div x-show="autocompleteOpen && searchQuery.trim().length > 0" x-cloak
+                         x-transition:enter="transition ease-out duration-150"
+                         x-transition:enter-start="opacity-0 -translate-y-1"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden py-2 z-50">
+                        
+                        <!-- Direct Action: Cari Kata Kunci yang Diketik -->
+                        <a :href="'{{ route('products.index') }}?q=' + encodeURIComponent(searchQuery.trim())"
+                           class="flex items-center justify-between px-4 py-2.5 text-sm font-bold text-emerald-700 bg-emerald-50/70 hover:bg-emerald-100/80 border-b border-emerald-100 transition">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                                    <svg style="width: 14px; height: 14px; min-width: 14px; min-height: 14px;" class="shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                </span>
+                                <span class="truncate">Cari <span class="text-slate-900 underline underline-offset-2" x-text="'&ldquo;' + searchQuery.trim() + '&rdquo;'"></span> di semua produk</span>
+                            </div>
+                            <span class="text-xs text-emerald-600 font-extrabold uppercase shrink-0 flex items-center gap-1">
+                                Enter &rarr;
+                            </span>
+                        </a>
 
-                    <!-- Trending Search Tags Under Search (Desktop) -->
-                    <div class="hidden lg:flex items-center gap-1.5 mt-1.5 text-[11px] text-slate-400 overflow-hidden whitespace-nowrap">
-                        <span class="font-bold text-slate-500 shrink-0">Trending:</span>
-                        <a href="{{ route('products.index', ['filter' => 'flash_sale']) }}" class="text-rose-600 font-bold hover:underline shrink-0">🔥 Flash Sale</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'RTX 4090']) }}" class="hover:text-emerald-600 transition shrink-0">RTX 4090 Strix</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'Ryzen 7 7800X3D']) }}" class="hover:text-emerald-600 transition shrink-0">Ryzen 7 7800X3D</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'Wooting 60HE']) }}" class="hover:text-emerald-600 transition shrink-0">Wooting 60HE+</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'PS5 Pro']) }}" class="hover:text-emerald-600 transition shrink-0">PS5 Pro Digital</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'Steam Deck OLED']) }}" class="hover:text-emerald-600 transition shrink-0">Steam Deck OLED</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'Superlight 2']) }}" class="hover:text-emerald-600 transition shrink-0">Superlight 2</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'Moondrop Blessing 3']) }}" class="hover:text-emerald-600 transition shrink-0">Moondrop Blessing 3</a>
-                        <span>•</span>
-                        <a href="{{ route('products.index', ['q' => 'G923']) }}" class="hover:text-emerald-600 transition shrink-0">Sim Racing G923</a>
+                        <div class="px-4 pt-2.5 pb-1 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-400 font-black uppercase tracking-wider">Rekomendasi Produk Populer</span>
+                        </div>
+
+                        <!-- Filtered Suggestions List -->
+                        <div class="max-h-72 overflow-y-auto divide-y divide-slate-100">
+                            <template x-for="item in suggestions.filter(s => s.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 6)" :key="item">
+                                <a :href="'{{ route('products.index') }}?q=' + encodeURIComponent(item)"
+                                    class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-emerald-700 transition font-semibold group">
+                                    <svg style="width: 16px; height: 16px; min-width: 16px; min-height: 16px;" class="shrink-0 text-slate-400 group-hover:text-emerald-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                    <span class="truncate" x-text="item"></span>
+                                </a>
+                            </template>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Actions: Wishlist, Cart & Profile -->
-                <div class="flex items-center gap-2 sm:gap-3.5 shrink-0">
+                <!-- Actions: Wishlist, Cart & Profile (Bigger & Ergonomic) -->
+                <div class="flex items-center gap-2 sm:gap-4 shrink-0">
                     
                     @auth
-                        <!-- Wishlist Icon -->
-                        @php
-                            $wishlistCount = auth()->user()->wishlists()->count();
-                        @endphp
-                        <a href="{{ route('wishlist.index') }}"
-                           class="relative p-2 text-slate-600 hover:text-rose-500 rounded-xl hover:bg-slate-100 transition hidden sm:flex items-center justify-center"
-                           title="Wishlist Saya">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                            @if($wishlistCount > 0)
-                                <span class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-black flex items-center justify-center shadow-xs">
-                                    {{ $wishlistCount > 99 ? '99+' : $wishlistCount }}
-                                </span>
-                            @endif
-                        </a>
+                        @if(auth()->user()->isAdmin())
+                            <!-- Admin Panel Direct Button -->
+                            <a href="{{ route('admin.dashboard') }}"
+                               class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-xs sm:text-sm font-black transition shadow-2xs">
+                                <svg class="w-4 h-4 text-purple-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                                <span class="hidden sm:inline">Panel Admin</span>
+                            </a>
+                        @else
+                            <!-- Wishlist Icon -->
+                            @php
+                                $wishlistCount = auth()->user()->wishlists()->count();
+                            @endphp
+                            <a href="{{ route('wishlist.index') }}"
+                               class="relative p-2.5 sm:p-3 text-slate-700 hover:text-rose-500 rounded-2xl hover:bg-slate-100 transition hidden sm:flex items-center justify-center"
+                               title="Wishlist Saya">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                @if($wishlistCount > 0)
+                                    <span class="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
+                                        {{ $wishlistCount > 99 ? '99+' : $wishlistCount }}
+                                    </span>
+                                @endif
+                            </a>
 
-                        <!-- Cart Icon -->
-                        @php
-                            $cartCount = auth()->user()->cart?->total_count ?? 0;
-                        @endphp
-                        <a href="{{ route('cart.index') }}"
-                           class="relative p-2 text-slate-600 hover:text-emerald-600 rounded-xl hover:bg-slate-100 transition flex items-center justify-center"
-                           title="Keranjang Belanja">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                            @if($cartCount > 0)
-                                <span class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-black flex items-center justify-center shadow-xs">
+                            <!-- Cart Icon -->
+                            @php
+                                $cartCount = auth()->user()->cart?->total_count ?? 0;
+                            @endphp
+                            <a href="{{ route('cart.index') }}"
+                               x-data="{ count: {{ $cartCount }} }"
+                               @cart-updated.window="count++"
+                               class="relative p-2.5 sm:p-3 text-slate-700 hover:text-emerald-600 rounded-2xl hover:bg-slate-100 transition flex items-center justify-center"
+                               title="Keranjang Belanja">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                <span x-show="count > 0"
+                                      x-text="count > 99 ? '99+' : count"
+                                      class="absolute top-1 right-1 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
                                     {{ $cartCount > 99 ? '99+' : $cartCount }}
                                 </span>
-                            @endif
-                        </a>
+                            </a>
+                        @endif
 
                         <!-- User Profile Dropdown -->
                         <div class="relative" @click.outside="userDropdownOpen = false">
                             <button @click="userDropdownOpen = !userDropdownOpen"
                                     type="button"
-                                    class="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-100 transition focus:outline-hidden">
-                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center border border-emerald-300">
+                                    class="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-slate-100 transition focus:outline-hidden">
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-emerald-100 text-emerald-800 font-black text-sm sm:text-base flex items-center justify-center border-2 border-emerald-400 shadow-xs">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
-                                <span class="text-xs font-bold text-slate-800 hidden md:block max-w-[100px] truncate">
+                                <span class="text-sm sm:text-base font-extrabold text-slate-800 hidden md:block max-w-[140px] truncate">
                                     {{ auth()->user()->name }}
                                 </span>
-                                <svg class="w-3.5 h-3.5 text-slate-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                <svg class="w-4 h-4 text-slate-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
                             </button>
 
                             <!-- Profile Menu -->
@@ -425,16 +544,9 @@
 
                                 @if(auth()->user()->isAdmin())
                                     <div class="py-1 border-t border-slate-100">
-                                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-4 py-2 text-xs text-emerald-600 font-bold hover:bg-emerald-50">
+                                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-4 py-2 text-xs text-purple-700 font-bold hover:bg-purple-50">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                                            Admin Dashboard
-                                        </a>
-                                    </div>
-                                @elseif(auth()->user()->isSeller())
-                                    <div class="py-1 border-t border-slate-100">
-                                        <a href="{{ route('seller.dashboard') }}" class="flex items-center gap-2.5 px-4 py-2 text-xs text-emerald-600 font-bold hover:bg-emerald-50">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                            Dashboard Toko
+                                            Dashboard Admin
                                         </a>
                                     </div>
                                 @endif
@@ -451,14 +563,14 @@
                             </div>
                         </div>
                     @else
-                        <!-- Guest Auth Buttons -->
-                        <div class="flex items-center gap-2">
+                        <!-- Guest Auth Buttons (Bigger) -->
+                        <div class="flex items-center gap-2.5">
                             <a href="{{ route('login') }}"
-                               class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-xl border border-emerald-500 transition">
+                               class="px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-2xl border-2 border-emerald-500 transition">
                                 Masuk
                             </a>
                             <a href="{{ route('register') }}"
-                                class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl shadow-xs transition hidden sm:inline-block">
+                                class="px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-2xl shadow-xs transition hidden sm:inline-block">
                                 Daftar
                             </a>
                         </div>
@@ -466,119 +578,6 @@
 
                 </div>
             </div>
-
-            <!-- Row 2: Comprehensive 15 Sub-Header Navigation Menu Bar (Desktop) -->
-            <nav class="hidden md:flex items-center justify-between py-2 border-t border-slate-100 text-xs font-semibold text-slate-700">
-                <div class="flex items-center gap-2 lg:gap-2.5 overflow-x-auto no-scrollbar py-0.5">
-                    <!-- Flash Sale -->
-                    <a href="{{ route('products.index', ['filter' => 'flash_sale']) }}" class="flex items-center gap-1.5 text-rose-600 hover:text-rose-700 font-black transition shrink-0 bg-rose-50/80 px-2.5 py-1 rounded-lg border border-rose-200/60">
-                        <span class="flex h-2 w-2 relative">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-600"></span>
-                        </span>
-                        <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
-                        <span>Flash Sale</span>
-                        <span class="px-1.5 py-0.2 bg-rose-500 text-white text-[9px] rounded font-black">HOT</span>
-                    </a>
-
-                    <!-- 1. Laptop Gaming -->
-                    <a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>💻 Laptop RTX</span>
-                    </a>
-
-                    <!-- 2. PC Rakitan -->
-                    <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🖥️ PC Rakitan</span>
-                    </a>
-
-                    <!-- 3. PC Komponen -->
-                    <a href="{{ route('products.index', ['category' => 'pc-komponen']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>⚙️ Komponen PC</span>
-                    </a>
-
-                    <!-- 4. RAM & SSD Storage -->
-                    <a href="{{ route('products.index', ['category' => 'ram-ssd-storage']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>⚡ RAM & SSD</span>
-                    </a>
-
-                    <!-- 5. Cooling & Power Supply -->
-                    <a href="{{ route('products.index', ['category' => 'cooling-power-supply']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>❄️ Cooler & PSU</span>
-                    </a>
-
-                    <!-- 6. Keyboard Mechanical -->
-                    <a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>⌨️ Keyboard</span>
-                    </a>
-
-                    <!-- 7. Mouse Gaming -->
-                    <a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🖱️ Mouse</span>
-                    </a>
-
-                    <!-- 8. Audio & Headset -->
-                    <a href="{{ route('products.index', ['category' => 'audio-headset']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🎧 Audio & IEM</span>
-                    </a>
-
-                    <!-- 9. Monitor Gaming -->
-                    <a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>📺 Monitor 240Hz</span>
-                    </a>
-
-                    <!-- 10. Konsol & Handheld -->
-                    <a href="{{ route('products.index', ['category' => 'konsol-handheld']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🎮 PS5 & Handheld</span>
-                    </a>
-
-                    <!-- 11. Smartphone Gaming -->
-                    <a href="{{ route('products.index', ['category' => 'smartphone-gaming']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>📱 HP Gaming</span>
-                    </a>
-
-                    <!-- 12. Streaming Gear -->
-                    <a href="{{ route('products.index', ['category' => 'streaming-gear']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🎥 Stream Gear</span>
-                    </a>
-
-                    <!-- 13. Racing Sim & VR -->
-                    <a href="{{ route('products.index', ['category' => 'racing-sim-vr']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🏎️ Sim Racing</span>
-                    </a>
-
-                    <!-- 14. Meja & Kursi Setup -->
-                    <a href="{{ route('products.index', ['category' => 'kursi-setup-meja']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🪑 Meja & Kursi</span>
-                    </a>
-
-                    <!-- 15. Aksesoris Gaming -->
-                    <a href="{{ route('products.index', ['category' => 'aksesoris-gaming']) }}" class="hover:text-emerald-600 hover:bg-slate-100/60 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🔌 Aksesoris</span>
-                    </a>
-
-                    <!-- Simulasi Rakit PC -->
-                    <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="text-emerald-700 font-bold bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/70 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🛠️ Rakit PC</span>
-                    </a>
-
-                    <!-- Kupon Diskon -->
-                    <a href="{{ route('products.index', ['q' => 'Voucher']) }}" class="text-amber-800 font-bold bg-amber-50 hover:bg-amber-100/80 border border-amber-200/70 px-2 py-1 rounded-lg transition shrink-0 flex items-center gap-1">
-                        <span>🎟️ Kupon</span>
-                    </a>
-                </div>
-
-                <div class="flex items-center gap-3 shrink-0 pl-4 border-l border-slate-200">
-                    <a href="{{ route('products.index', ['sort' => 'popular']) }}" class="text-emerald-600 hover:text-emerald-700 font-bold flex items-center gap-1 text-xs">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span>Toko Resmi</span>
-                    </a>
-                    <span class="text-slate-300">|</span>
-                    <a href="{{ route('products.index') }}" class="text-slate-500 hover:text-slate-900 transition text-xs">
-                        Semua Katalog
-                    </a>
-                </div>
-            </nav>
-
         </div>
     </header>
 
@@ -607,16 +606,13 @@
                 <div class="flex flex-col overflow-y-auto bg-white px-5 pb-6 pt-5 shadow-2xl w-full">
                     <!-- Drawer Header -->
                     <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                        <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center text-white text-base shadow-sm ring-2 ring-emerald-500/20">
-                                🎮
+                        <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                            <div class="w-10 h-10 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                             </div>
                             <div class="flex flex-col">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="font-black text-sm tracking-tight text-slate-900 leading-none">Kebutuhan<span class="text-emerald-600">Gaming</span></span>
-                                    <span class="px-1 py-0.2 bg-emerald-500 text-white font-black text-[8px] rounded uppercase">Gen Z</span>
-                                </div>
-                                <span class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Tech & Gaming Gear Store</span>
+                                <span class="font-black text-xl tracking-tight text-slate-900 leading-none">SetUp<span class="text-emerald-600">Pedia</span></span>
+                                <span class="text-[10px] text-slate-400 font-extrabold tracking-wider uppercase mt-0.5">Gaming & Tech Setup</span>
                             </div>
                         </a>
                         <button @click="mobileMenuOpen = false" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition">
@@ -628,76 +624,151 @@
                     <div class="py-3 border-b border-slate-100">
                         <div class="grid grid-cols-2 gap-2 text-xs">
                             <a href="{{ route('products.index', ['filter' => 'flash_sale']) }}" class="flex items-center gap-2 p-2 rounded-xl bg-rose-50 text-rose-700 font-bold border border-rose-100">
-                                <span class="text-sm">🔥</span>
+                                <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                                </span>
                                 <div class="truncate">
-                                    <p class="text-[11px] leading-tight">Flash Sale</p>
-                                    <p class="text-[9px] text-rose-500 font-normal">Diskon s/d 70%</p>
+                                    <p class="text-[11px] leading-tight font-black">Flash Sale</p>
+                                    <p class="text-[9px] text-rose-500 font-semibold">Diskon s/d 70%</p>
                                 </div>
                             </a>
                             <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="flex items-center gap-2 p-2 rounded-xl bg-emerald-50 text-emerald-800 font-bold border border-emerald-100">
-                                <span class="text-sm">🛠️</span>
+                                <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </span>
                                 <div class="truncate">
-                                    <p class="text-[11px] leading-tight">Rakit PC</p>
-                                    <p class="text-[9px] text-emerald-600 font-normal">Gratis Perakitan</p>
+                                    <p class="text-[11px] leading-tight font-black">Rakit PC</p>
+                                    <p class="text-[9px] text-emerald-600 font-semibold">Gratis Rakit</p>
                                 </div>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Navigation Menus -->
+                    <!-- Primary Mobile Navigation Menus (Besar & Jelas) -->
+                    <div class="py-3 space-y-1 border-b border-slate-100">
+                        <a href="{{ route('home') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-black {{ request()->routeIs('home') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-800 hover:bg-slate-50' }}">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            <span>Beranda</span>
+                        </a>
+                        <a href="{{ route('products.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-black {{ request()->routeIs('products.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-800 hover:bg-slate-50' }}">
+                            <span class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                                <span>Semua Produk</span>
+                            </span>
+                            <span class="text-[10px] px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Katalog</span>
+                        </a>
+                        @auth
+                            @if(auth()->user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-black text-purple-700 bg-purple-50 hover:bg-purple-100">
+                                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                                    <span>Panel Admin</span>
+                                </a>
+                            @else
+                                <a href="{{ route('customer.orders.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-black {{ request()->routeIs('customer.orders.*') || request()->routeIs('orders.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-800 hover:bg-slate-50' }}">
+                                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                                    <span>Pesanan Saya</span>
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-black text-slate-800 hover:bg-slate-50">
+                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                                <span>Pesanan Saya</span>
+                            </a>
+                        @endauth
+                    </div>
+
+                    <!-- Category List -->
                     <div class="py-4 space-y-1 border-b border-slate-100">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2">15 Kategori Gear Gaming</p>
-                        <a href="{{ route('home') }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold {{ request()->routeIs('home') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-700 hover:bg-slate-50' }}">
-                            <span class="text-sm">🏠</span> Beranda
-                        </a>
-                        <a href="{{ route('products.index') }}" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="flex items-center gap-3"><span class="text-sm">📦</span> Semua Katalog Gear</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded font-bold">Lengkap</span>
-                        </a>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2">Kategori Produk</p>
                         <a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">💻</span> Laptop Gaming RTX Series
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </span>
+                            <span>Laptop Gaming RTX Series</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🖥️</span> PC Rakitan Gaming Ready
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm3 4h.01M8 12h.01M16 8h.01M16 12h.01M8 16h8"/></svg>
+                            </span>
+                            <span>PC Rakitan Gaming Ready</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'pc-komponen']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">⚙️</span> Komponen PC & Hardware
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2zm2 4h6v6H9V9z"/></svg>
+                            </span>
+                            <span>Komponen PC & Hardware</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'ram-ssd-storage']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">⚡</span> RAM DDR5 & SSD NVMe
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </span>
+                            <span>RAM DDR5 & SSD NVMe</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'cooling-power-supply']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">❄️</span> Cooler AIO & Power Supply
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+                            </span>
+                            <span>Cooler AIO & Power Supply</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">⌨️</span> Keyboard Mechanical & Switch
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2zm3 4h.01M10 10h.01M14 10h.01M17 10h.01M7 14h10"/></svg>
+                            </span>
+                            <span>Keyboard Mechanical & Switch</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🖱️</span> Mouse Gaming Ultralight
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3a6 6 0 00-6 6v6a6 6 0 0012 0V9a6 6 0 00-6-6zm0 0v5"/></svg>
+                            </span>
+                            <span>Mouse Gaming Ultralight</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'audio-headset']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🎧</span> Headset 7.1, IEM & DAC
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h1a2 2 0 002-2v-4a2 2 0 00-2-2H4a1 1 0 00-1 1v4zm18 0a3 3 0 01-3 3h-1a2 2 0 01-2-2v-4a2 2 0 012-2h3a1 1 0 011 1v4z"/></svg>
+                            </span>
+                            <span>Headset 7.1, IEM & DAC</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">📺</span> Monitor Gaming 240Hz OLED
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 5h18a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+                            </span>
+                            <span>Monitor Gaming 240Hz OLED</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'konsol-handheld']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🎮</span> PlayStation 5 & Handheld
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 10h.01M17 12h.01M7 10h4M9 8v4M6.5 19l1.8-6.3A3 3 0 0111.2 10h1.6a3 3 0 012.9 2.7L17.5 19a2 2 0 01-3.4 1.4l-1.3-1.4h-1.6l-1.3 1.4A2 2 0 016.5 19z"/></svg>
+                            </span>
+                            <span>PlayStation 5 & Handheld</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'smartphone-gaming']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">📱</span> Smartphone Gaming
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+                            </span>
+                            <span>Smartphone Gaming</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'streaming-gear']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🎥</span> Streaming Gear & Capture Card
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            </span>
+                            <span>Streaming Gear & Capture</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'racing-sim-vr']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🏎️</span> Racing Simulator & VR
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><circle cx="12" cy="12" r="3" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 3v6m0 6v6M3 12h6m6 0h6"/></svg>
+                            </span>
+                            <span>Racing Simulator & VR</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'kursi-setup-meja']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🪑</span> Kursi Gaming & Standing Desk
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 3v10a4 4 0 004 4h6a4 4 0 004-4V3M12 17v4m-4 0h8M9 7h6"/></svg>
+                            </span>
+                            <span>Kursi Gaming & Standing Desk</span>
                         </a>
                         <a href="{{ route('products.index', ['category' => 'aksesoris-gaming']) }}" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
-                            <span class="text-sm">🔌</span> Aksesoris & Modding Gear
+                            <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                            </span>
+                            <span>Aksesoris & Modding Gear</span>
                         </a>
                     </div>
 
@@ -743,111 +814,147 @@
         @yield('content')
     </main>
 
-    <!-- Marketplace Modern Clean Footer -->
-    <footer class="bg-white border-t border-slate-200/80 mt-16 pt-14 pb-10 text-sm text-slate-600">
+    <!-- Dedicated Footer Style to guarantee 100% visibility & solid background with Hijau Sage & Putih Abu -->
+    <style>
+        .footer-custom-green {
+            background-color: #384e40 !important;
+            color: #eef3ef !important;
+        }
+        .footer-custom-green .footer-title {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.05em !important;
+        }
+        .footer-custom-green a {
+            color: #dce5df !important;
+            transition: color 0.15s ease-in-out;
+        }
+        .footer-custom-green a:hover {
+            color: #ffffff !important;
+            text-decoration: underline;
+        }
+        .footer-custom-green .footer-desc {
+            color: #c5d3ca !important;
+        }
+        .footer-custom-green .footer-icon {
+            color: #a4c7ad !important;
+        }
+        .footer-custom-green .footer-social-btn {
+            background-color: rgba(255, 255, 255, 0.12) !important;
+            color: #ffffff !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            transition: all 0.15s ease;
+        }
+        .footer-custom-green .footer-social-btn:hover {
+            background-color: #507159 !important;
+            color: #ffffff !important;
+        }
+        .footer-custom-green .footer-divider {
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        .footer-custom-green .footer-badge {
+            background-color: rgba(255, 255, 255, 0.12) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        }
+    </style>
+
+    <!-- Modern SetUp Pedia Sage Green & Putih Abu Footer -->
+    <footer class="footer-custom-green mt-20 pt-12 pb-8 text-xs" style="background-color: #384e40 !important; color: #eef3ef !important;">
         <div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 mb-12">
-                <!-- Col 1: Brand & Profile -->
-                <div class="lg:col-span-2">
-                    <div class="flex items-center gap-2.5 mb-4">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center text-white font-black text-xl shadow-sm ring-2 ring-emerald-500/20">
-                            🎮
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-10 footer-divider border-b">
+                
+                <!-- Col 1: Brand & About (lg:col-span-4) -->
+                <div class="lg:col-span-4 space-y-4">
+                    <a href="{{ route('home') }}" class="flex items-center gap-3.5 group inline-flex">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0" style="background-color: #507159 !important;">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                         </div>
                         <div class="flex flex-col">
-                            <div class="flex items-center gap-2">
-                                <span class="font-black text-xl tracking-tight text-slate-900 leading-none">
-                                    Kebutuhan<span class="text-emerald-600">Gaming</span>
-                                </span>
-                                <span class="px-1.5 py-0.5 bg-emerald-600 text-white font-black text-[9px] rounded-md tracking-wider uppercase shadow-2xs">Gen Z</span>
+                            <span class="font-black text-2xl sm:text-3xl tracking-tight leading-none text-white">
+                                SetUp<span style="color: #a4c7ad;">Pedia</span>
+                            </span>
+                            <span class="text-[11px] font-extrabold tracking-wider uppercase mt-1" style="color: #c5d3ca;">GAMING & TECH SETUP</span>
+                        </div>
+                    </a>
+
+                    <p class="text-xs footer-desc leading-relaxed max-w-sm">
+                        SetUp Pedia adalah toko online perlengkapan komputer, komponen PC, dan room setup terlengkap untuk pro player, creator, dan antusias tech. Produk original, harga terbaik, dan pengiriman cepat ke seluruh Indonesia.
+                    </p>
+                </div>
+
+                <!-- Col 2: Kategori (lg:col-span-2) -->
+                <div class="lg:col-span-2 space-y-3">
+                    <h3 class="text-xs uppercase footer-title">KATEGORI</h3>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="{{ route('products.index', ['category' => 'komponen-pc']) }}">Komponen PC & Hardware</a></li>
+                        <li><a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}">Laptop & Komputer</a></li>
+                        <li><a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}">Keyboard Mechanical</a></li>
+                        <li><a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}">Mouse Gaming</a></li>
+                        <li><a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}">Monitor Fast IPS & OLED</a></li>
+                        <li><a href="{{ route('products.index', ['category' => 'audio-headset']) }}">Audio & Headset</a></li>
+                        <li class="pt-1"><a href="{{ route('products.index') }}" class="font-extrabold text-white underline" style="color: #ffffff !important;">Lihat Semua</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Bantuan (lg:col-span-2) -->
+                <div class="lg:col-span-2 space-y-3">
+                    <h3 class="text-xs uppercase footer-title">BANTUAN</h3>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="{{ route('home') }}">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="{{ route('customer.orders.index') }}">Lacak Pesanan</a></li>
+                        <li><a href="{{ route('products.index', ['sale' => 1]) }}">Promo & Diskon</a></li>
+                        <li><a href="{{ route('customer.profile') }}">Akun Saya</a></li>
+                        @if(auth()->check() && auth()->user()->isAdmin())
+                            <li><a href="{{ route('admin.dashboard') }}" style="color: #6ee7b7 !important; font-weight: bold;">Admin Panel</a></li>
+                        @endif
+                    </ul>
+                </div>
+
+                <!-- Col 4: Hubungi Kami (lg:col-span-4) -->
+                <div class="lg:col-span-4 space-y-3">
+                    <h3 class="text-xs uppercase footer-title">HUBUNGI KAMI</h3>
+                    <div class="space-y-3.5 text-xs">
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 footer-icon shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span class="leading-relaxed footer-desc">Jl. W.R. Supratman, Kandang Limun, Kec. Muara Bangka Hulu, Kota Bengkulu</span>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 footer-icon shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            <div>
+                                <div class="font-bold text-white" style="color: #ffffff;">0800-1-SETUPPEDIA</div>
+                                <div class="footer-desc">0812-3456-7890</div>
                             </div>
-                            <span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-0.5">Official Tech & Gaming Gear Marketplace</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <svg class="w-4 h-4 footer-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <span class="text-white font-medium" style="color: #ffffff;">cs@setuppedia.id</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <svg class="w-4 h-4 footer-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span class="footer-desc">Senin - Minggu, 08.00 - 21.00 WIB</span>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed max-w-md mb-5">
-                        Platform e-commerce spesialis perangkat elektronik dan perlengkapan gaming terlengkap untuk generasi Gen Z di Indonesia. Menghadirkan jajaran laptop gaming RTX, komponen PC rakitan custom, monitor 240Hz OLED, mechanical keyboard, konsol next-gen, dan perlengkapan streaming 100% original bergaransi distributor resmi.
-                    </p>
-                    <div class="flex flex-wrap items-center gap-2 text-xs">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200/80">
-                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            100% Original Tech
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-50 text-teal-800 font-bold rounded-lg border border-teal-200/80">
-                            <svg class="w-3.5 h-3.5 text-teal-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            Garansi Distributor Resmi
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-cyan-50 text-cyan-800 font-bold rounded-lg border border-cyan-200/80">
-                            <svg class="w-3.5 h-3.5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                            Free Packing Kayu
-                        </span>
-                    </div>
                 </div>
 
-                <!-- Col 2: Hardware & PC -->
-                <div>
-                    <h3 class="font-bold text-slate-900 mb-4 text-xs tracking-wider uppercase">Hardware & Komponen</h3>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li><a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" class="hover:text-emerald-600 transition">Laptop Gaming RTX 40 & 50</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'pc-komponen']) }}" class="hover:text-emerald-600 transition">Komponen PC & Motherboard</a></li>
-                        <li><a href="{{ route('products.index', ['q' => 'PC Rakitan']) }}" class="hover:text-emerald-600 transition font-medium text-emerald-700">Simulasi Rakit PC Gaming</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" class="hover:text-emerald-600 transition">Monitor Fast IPS & OLED 240Hz</a></li>
-                        <li><a href="{{ route('products.index', ['q' => 'RAM SSD']) }}" class="hover:text-emerald-600 transition">RAM DDR5 & SSD NVMe Gen4</a></li>
-                        <li><a href="{{ route('products.index', ['q' => 'RTX 4070']) }}" class="hover:text-emerald-600 transition">Kartu Grafis GPU Nvidia & Radeon</a></li>
-                    </ul>
-                </div>
-
-                <!-- Col 3: Peripheral & Setup -->
-                <div>
-                    <h3 class="font-bold text-slate-900 mb-4 text-xs tracking-wider uppercase">Peripheral & Setup Room</h3>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li><a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" class="hover:text-emerald-600 transition">Keyboard Mechanical & Custom</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" class="hover:text-emerald-600 transition">Mouse Gaming Ultralight & Wireless</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'audio-headset']) }}" class="hover:text-emerald-600 transition">Headset Spatial 7.1 & Audio DAC</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'streaming-gear']) }}" class="hover:text-emerald-600 transition">Streaming Mic & Capture Card</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'kursi-setup-meja']) }}" class="hover:text-emerald-600 transition">Ergonomic Gaming Chair & Desk</a></li>
-                        <li><a href="{{ route('products.index', ['category' => 'konsol-handheld']) }}" class="hover:text-emerald-600 transition">PS5 Slim, Pro & Steam Deck</a></li>
-                    </ul>
-                </div>
-
-                <!-- Col 4: Layanan & Seller -->
-                <div>
-                    <h3 class="font-bold text-slate-900 mb-4 text-xs tracking-wider uppercase">Layanan & Mitra</h3>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li><a href="{{ route('products.index', ['filter' => 'flash_sale']) }}" class="hover:text-rose-600 transition text-rose-600 font-bold">Super Flash Sale Harian</a></li>
-                        <li><a href="{{ route('products.index', ['sort' => 'popular']) }}" class="hover:text-emerald-600 transition">Daftar Toko Resmi Official</a></li>
-                        <li><a href="{{ route('register') }}?seller=1" class="hover:text-emerald-600 transition text-emerald-700 font-semibold">Buka Toko Seller Gratis</a></li>
-                        <li><a href="{{ route('login') }}" class="hover:text-emerald-600 transition">Pusat Seller Center</a></li>
-                        <li><a href="{{ route('products.index', ['q' => 'Garansi']) }}" class="hover:text-emerald-600 transition">Cek Garansi & Serial Number</a></li>
-                        <li><a href="{{ route('products.index', ['q' => 'Voucher']) }}" class="hover:text-emerald-600 transition">Pusat Voucher Promo</a></li>
-                    </ul>
-                </div>
             </div>
 
-            <!-- Payment Methods & Logistics Badges -->
-            <div class="pt-8 border-t border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-6 text-xs text-slate-500">
-                <div class="space-y-3 text-center lg:text-left">
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                        <span class="text-[11px] font-bold text-slate-700 mr-2">Metode Pembayaran Resmi:</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">QRIS Real-Time</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">BCA Virtual Account</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">Mandiri Bill</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">BNI / BRI VA</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">GoPay</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">OVO</span>
-                        <span class="px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-slate-800 font-bold text-[11px]">Cash on Delivery (COD)</span>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                        <span class="text-[11px] font-bold text-slate-700 mr-2">Logistik Pengiriman Aman:</span>
-                        <span class="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-slate-600 text-[10px]">JNE Express</span>
-                        <span class="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-slate-600 text-[10px]">SiCepat REG & Cargo</span>
-                        <span class="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-slate-600 text-[10px]">J&T Gaming Cargo</span>
-                        <span class="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-slate-600 text-[10px]">GoSend Instan 2 Jam</span>
-                        <span class="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded text-slate-600 text-[10px]">GrabExpress Someday</span>
-                    </div>
-                </div>
-
-                <div class="flex flex-col items-center lg:items-end gap-1 text-center lg:text-right shrink-0">
-                    <p class="font-bold text-slate-700 text-xs">&copy; {{ date('Y') }} Kebutuhan Gaming Gen Z. All rights reserved.</p>
-                    <p class="text-[11px] text-slate-400">Tempat Belanja Elektronik & Gaming Gear Terpercaya di Indonesia.</p>
+            <!-- Bottom Copyright & Payment Methods -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] footer-desc">
+                <p>&copy; {{ date('Y') }} <strong class="text-white font-bold" style="color: #ffffff;">SetUp Pedia</strong>. Seluruh hak cipta dilindungi.</p>
+                <div class="flex flex-wrap items-center justify-center sm:justify-end gap-1.5 sm:gap-2 text-[10px]">
+                    <span class="text-slate-300 mr-1 font-semibold">Pembayaran:</span>
+                    <span class="px-2.5 py-0.5 rounded footer-badge">Midtrans</span>
+                    <span class="px-2.5 py-0.5 rounded footer-badge">QRIS</span>
+                    <span class="px-2.5 py-0.5 rounded footer-badge">Virtual Account</span>
+                    <span class="px-2.5 py-0.5 rounded footer-badge">GoPay</span>
+                    <span class="px-2.5 py-0.5 rounded footer-badge">COD</span>
                 </div>
             </div>
         </div>
@@ -863,17 +970,24 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
             <span>Katalog</span>
         </a>
-        <a href="{{ route('cart.index') }}" class="relative flex flex-col items-center gap-0.5 text-[11px] {{ request()->routeIs('cart.*') ? 'text-emerald-600 font-bold' : 'text-slate-500' }}">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-            <span>Keranjang</span>
-            @auth
-                @if(($cartCount ?? 0) > 0)
-                    <span class="absolute -top-1 right-3 w-4 h-4 bg-emerald-600 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-xs">
-                        {{ $cartCount > 99 ? '99+' : $cartCount }}
-                    </span>
-                @endif
-            @endauth
-        </a>
+        @if(auth()->check() && auth()->user()->isAdmin())
+            <a href="{{ route('admin.dashboard') }}" class="flex flex-col items-center gap-0.5 text-[11px] text-purple-700 font-bold">
+                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+                <span>Admin</span>
+            </a>
+        @else
+            <a href="{{ route('cart.index') }}" class="relative flex flex-col items-center gap-0.5 text-[11px] {{ request()->routeIs('cart.*') ? 'text-emerald-600 font-bold' : 'text-slate-500' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                <span>Keranjang</span>
+                @auth
+                    @if(($cartCount ?? 0) > 0)
+                        <span class="absolute -top-1 right-3 w-4 h-4 bg-emerald-600 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-xs">
+                            {{ $cartCount > 99 ? '99+' : $cartCount }}
+                        </span>
+                    @endif
+                @endauth
+            </a>
+        @endif
         <a href="{{ auth()->check() ? route('customer.orders.index') : route('login') }}" class="flex flex-col items-center gap-0.5 text-[11px] {{ request()->routeIs('customer.orders.*') ? 'text-emerald-600 font-bold' : 'text-slate-500' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
             <span>Pesanan</span>
