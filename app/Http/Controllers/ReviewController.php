@@ -31,7 +31,7 @@ class ReviewController extends Controller
             return back()->with('error', 'Anda sudah memberikan ulasan untuk produk pada pesanan ini.');
         }
 
-        // 4. Seller cannot review their own product
+        // 4. Shop owner cannot review their own product
         if ($user->shop && $orderItem->shop_id === $user->shop->id) {
             return back()->with('error', 'Penjual tidak diperbolehkan mengulas produk dari tokonya sendiri.');
         }

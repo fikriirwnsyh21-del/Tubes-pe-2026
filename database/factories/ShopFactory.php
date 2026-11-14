@@ -17,7 +17,7 @@ class ShopFactory extends Factory
         $cities = ['Jakarta Pusat', 'Jakarta Barat', 'Surabaya', 'Bandung', 'Medan', 'Semarang', 'Tangerang', 'Bekasi', 'Yogyakarta'];
 
         return [
-            'user_id' => User::factory()->seller(),
+            'user_id' => User::factory()->admin(),
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => fake()->paragraph(),

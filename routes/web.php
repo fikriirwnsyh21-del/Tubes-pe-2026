@@ -11,7 +11,6 @@ use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Seller\DashboardController;
 use App\Http\Controllers\MidtransCallbackController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;

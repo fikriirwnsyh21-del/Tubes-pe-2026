@@ -56,13 +56,9 @@ class AuthController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'phone' => ['nullable', 'string', 'max:20'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_seller' => ['nullable', 'boolean'],
-            'shop_name' => ['required_if:is_seller,true,1', 'nullable', 'string', 'max:100'],
-            'shop_city' => ['required_if:is_seller,true,1', 'nullable', 'string', 'max:100'],
         ]);
 
-        $roleSlug = $request->boolean('is_seller') ? 'seller' : 'customer';
-        $role = Role::where('slug', $roleSlug)->first();
+        $role = Role::where('slug', 'customer')->first();
 
         $user = User::create([
             'role_id' => $role ? $role->id : 1,

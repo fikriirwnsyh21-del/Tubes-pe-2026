@@ -48,7 +48,7 @@ class OrderController extends Controller
             ->where('id', $id)
             ->firstOrFail();
 
-        // Authorize: customer, seller who owns items in this order, or admin
+        // Authorize: customer who owns this order or admin
         Gate::authorize('view', $order);
 
         // Auto-sync if Midtrans query params are present or if order was settled in Sandbox

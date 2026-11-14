@@ -30,7 +30,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/products/{slugOrId}', [ProductController::class, 'show']);
     Route::get('/categories', [CategoryController::class, 'index']);
 
-    // 3. Authenticated Customer & Seller Routes (auth:sanctum)
+    // 3. Authenticated Customer & Admin Routes (auth:sanctum)
     Route::middleware('auth:sanctum')->group(function () {
         // Auth management
         Route::get('/auth/me', [AuthController::class, 'me']);

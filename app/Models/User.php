@@ -83,11 +83,6 @@ class User extends Authenticatable
         return $this->role?->slug === 'admin';
     }
 
-    public function isSeller(): bool
-    {
-        return $this->role?->slug === 'seller';
-    }
-
     public function isCustomer(): bool
     {
         return $this->role?->slug === 'customer';

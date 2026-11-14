@@ -76,7 +76,6 @@
                                 @php
                                     $roleBadges = [
                                         'admin' => 'bg-rose-100 text-rose-800',
-                                        'seller' => 'bg-indigo-100 text-indigo-800',
                                         'customer' => 'bg-emerald-100 text-emerald-800',
                                     ];
                                 @endphp

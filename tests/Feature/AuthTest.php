@@ -83,27 +83,6 @@ class AuthTest extends TestCase
         $response->assertRedirect(route('home'));
     }
 
-    public function test_users_can_register_as_seller_and_create_shop(): void
-    {
-        $response = $this->post(route('register'), [
-            'name' => 'Jane Seller',
-            'email' => 'jane@example.com',
-            'phone' => '08987654321',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
-            'register_as_seller' => 1,
-            'shop_name' => 'Jane Official Tech',
-            'shop_city' => 'Jakarta Barat',
-        ]);
-
-        $this->assertAuthenticated();
-        $user = User::where('email', 'jane@example.com')->first();
-        $this->assertTrue($user->isSeller());
-        $this->assertNotNull($user->shop);
-        $this->assertEquals('Jane Official Tech', $user->shop->name);
-        $this->assertEquals('Jakarta Barat', $user->shop->city);
-    }
-
     public function test_users_can_logout(): void
     {
         $user = User::factory()->customer()->create();

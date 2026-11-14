@@ -16,15 +16,7 @@ class OrderPolicy
             return true;
         }
 
-        if ($order->user_id === $user->id) {
-            return true;
-        }
-
-        if ($user->isSeller() && $user->shop) {
-            return $order->items()->where('shop_id', $user->shop->id)->exists();
-        }
-
-        return false;
+        return $order->user_id === $user->id;
     }
 
     /**
@@ -40,18 +32,10 @@ class OrderPolicy
     }
 
     /**
-     * Determine whether the seller can update fulfillment status.
+     * Determine whether the user can update fulfillment status.
      */
     public function fulfill(User $user, Order $order): bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        if ($user->isSeller() && $user->shop) {
-            return $order->items()->where('shop_id', $user->shop->id)->exists();
-        }
-
-        return false;
+        return $user->isAdmin();
     }
 }

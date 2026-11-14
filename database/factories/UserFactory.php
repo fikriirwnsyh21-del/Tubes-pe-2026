@@ -44,17 +44,10 @@ class UserFactory extends Factory
         ]);
     }
 
-    public function seller(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'role_id' => Role::where('slug', 'seller')->value('id') ?? 2,
-        ]);
-    }
-
     public function customer(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role_id' => Role::where('slug', 'customer')->value('id') ?? 3,
+            'role_id' => Role::where('slug', 'customer')->value('id') ?? 2,
         ]);
     }
 }

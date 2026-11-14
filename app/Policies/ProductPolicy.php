@@ -28,7 +28,7 @@ class ProductPolicy
             return false;
         }
 
-        return $user->isAdmin() || ($user->isSeller() && $user->shop?->id === $product->shop_id);
+        return $user->isAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isAdmin() || ($user->isSeller() && $user->shop !== null);
+        return $user->isAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->isAdmin() || ($user->isSeller() && $user->shop?->id === $product->shop_id);
+        return $user->isAdmin();
     }
 
     /**
@@ -52,6 +52,6 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->isAdmin() || ($user->isSeller() && $user->shop?->id === $product->shop_id);
+        return $user->isAdmin();
     }
 }
