@@ -63,8 +63,8 @@ Relasi antar tabel utama dalam sistem:
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/fikriirwnsyh21-del/ecommerce_SetUp-Pedia.git
-cd ecommerce_SetUp-Pedia
+git clone https://github.com/fikriirwnsyh21-del/Tubes-pe-2026.git
+cd Tubes-pe-2026
 ```
 
 ### 2. Copy `.env` & Atur Konfigurasi
