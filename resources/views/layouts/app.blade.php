@@ -58,12 +58,45 @@
           ]
       }">
 
-    <!-- Sticky Main Header (Clean Modern Glassmorphism & High Contrast) -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+    <!-- Top Utility Bar (Trust Badges & Quick Navigation) -->
+    <div class="bg-slate-100 text-slate-600 text-xs py-1.5 px-4 border-b border-slate-200/80 hidden md:block">
+        <div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-1.5 font-semibold text-slate-700">
+                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    100% Produk Original & Bergaransi Resmi
+                </span>
+                <span class="flex items-center gap-1.5 font-medium text-slate-600">
+                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+                    Gratis Ongkir Seluruh Indonesia
+                </span>
+                <span class="flex items-center gap-1.5 font-medium text-slate-600">
+                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Pengiriman Cepat & Aman
+                </span>
+            </div>
+            <div class="flex items-center gap-4 font-semibold text-xs">
+                <a href="{{ route('products.index', ['max_price' => 5000000]) }}" class="text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 transition">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Koleksi Laptop & Budget &lt; 5 Juta
+                </a>
+                <span class="text-slate-300">|</span>
+                <a href="{{ route('home') }}#flash-sale" class="text-rose-600 hover:text-rose-700 font-bold flex items-center gap-1 transition">
+                    <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+                    Super Flash Sale
+                </a>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-500 font-normal">Layanan Bantuan: <span class="text-slate-700 font-bold">24 Jam</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Main Header (Clear, High Contrast, Modern E-Commerce) -->
+    <header class="sticky top-0 z-40 bg-white backdrop-blur-md border-b border-slate-200/90 shadow-xs">
         <div class="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
             
             <!-- Row 1: Logo, Nav Links, Search, Actions -->
-            <div class="flex items-center justify-between h-20 sm:h-24 lg:h-[92px] gap-3 sm:gap-6">
+            <div class="flex items-center justify-between py-3 sm:py-3.5 lg:py-4 gap-3 sm:gap-6">
                 
                 <!-- Left: Mobile Hamburger Button -->
                 <button @click="mobileMenuOpen = true"
@@ -90,8 +123,8 @@
                 <div class="relative hidden lg:block" @click.outside="categoryDropdownOpen = false">
                     <button @click="categoryDropdownOpen = !categoryDropdownOpen"
                             type="button"
-                            class="flex items-center gap-2.5 px-4.5 py-3 text-sm sm:text-base font-extrabold text-slate-800 hover:text-emerald-600 rounded-2xl hover:bg-emerald-50/70 border border-slate-200 transition shadow-xs">
-                        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            class="flex items-center gap-2 px-3.5 py-2.5 text-sm font-extrabold text-slate-800 hover:text-emerald-700 rounded-xl hover:bg-emerald-50/80 border border-slate-300 transition shadow-2xs">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                         <span>Semua Kategori</span>
                         <svg class="w-4 h-4 transition-transform duration-200 text-slate-400" :class="{'rotate-180': categoryDropdownOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
@@ -386,10 +419,15 @@
                     </div>
                 </div>
 
-                <!-- Modern Clean Search Bar with Autocomplete & Quick Tags (Bigger & Clearer) -->
-                <div class="flex-1 max-w-3xl xl:max-w-4xl 2xl:max-w-5xl relative" @click.outside="autocompleteOpen = false">
-                    <form action="{{ route('products.index') }}" method="GET" class="relative flex items-center">
+                <!-- Modern Clear Search Bar with Autocomplete & Trending Keywords -->
+                <div class="flex-1 max-w-2xl lg:max-w-3xl xl:max-w-4xl relative" @click.outside="autocompleteOpen = false">
+                    <form action="{{ route('products.index') }}" method="GET" class="relative">
                         <div class="relative w-full flex items-center">
+                            <!-- Left Search Icon inside input -->
+                            <div class="absolute left-3.5 sm:left-4 pointer-events-none text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            </div>
+                            
                             <input type="text"
                                    name="q"
                                    x-model="searchQuery"
@@ -400,15 +438,36 @@
                                    autocapitalize="off"
                                    spellcheck="false"
                                    placeholder="Cari laptop gaming RTX, keyboard mechanical, monitor 240Hz, PS5..."
-                                   class="w-full pl-5 pr-16 py-3 sm:py-3.5 bg-slate-50 hover:bg-slate-100/70 focus:bg-white text-sm sm:text-base text-slate-900 rounded-2xl border-2 border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition outline-hidden shadow-xs placeholder:text-slate-400 font-medium">
+                                   class="w-full pl-11 sm:pl-12 pr-20 sm:pr-24 py-2.5 sm:py-3 bg-white hover:bg-slate-50/80 focus:bg-white text-sm text-slate-900 rounded-xl border-2 border-slate-200 focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/15 transition shadow-xs placeholder:text-slate-400 font-medium">
                             
+                            <!-- Search Submit Button -->
                             <button type="submit"
-                                    class="absolute right-2 top-2 bottom-2 px-4 sm:px-5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl flex items-center justify-center transition shadow-xs cursor-pointer"
+                                    class="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 sm:px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg flex items-center gap-1.5 transition shadow-xs font-bold text-xs sm:text-sm cursor-pointer"
                                     title="Cari">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                <span class="hidden sm:inline">Cari</span>
                             </button>
                         </div>
                     </form>
+
+                    <!-- Popular Quick Keywords Strip -->
+                    <div class="hidden sm:flex items-center gap-2 mt-1.5 text-xs text-slate-500 overflow-x-auto no-scrollbar py-0.5">
+                        <span class="text-slate-400 font-bold text-[11px] uppercase tracking-wider shrink-0 flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+                            Populer:
+                        </span>
+                        <a href="{{ route('products.index', ['category' => 'laptop-gaming']) }}" class="hover:text-emerald-600 font-semibold text-slate-700 hover:underline underline-offset-2 whitespace-nowrap">Laptop Gaming</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ route('products.index', ['max_price' => 5000000]) }}" class="hover:text-emerald-700 font-bold text-emerald-700 hover:underline underline-offset-2 whitespace-nowrap">Budget &lt; 5 Juta</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ route('products.index', ['category' => 'keyboard-mechanical']) }}" class="hover:text-emerald-600 font-semibold text-slate-700 hover:underline underline-offset-2 whitespace-nowrap">Keyboard Mechanical</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ route('products.index', ['category' => 'mouse-gaming']) }}" class="hover:text-emerald-600 font-semibold text-slate-700 hover:underline underline-offset-2 whitespace-nowrap">Mouse Wireless</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ route('products.index', ['category' => 'monitor-gaming']) }}" class="hover:text-emerald-600 font-semibold text-slate-700 hover:underline underline-offset-2 whitespace-nowrap">Monitor 240Hz</a>
+                        <span class="text-slate-300">•</span>
+                        <a href="{{ route('products.index', ['category' => 'pc-rakitan']) }}" class="hover:text-emerald-600 font-semibold text-slate-700 hover:underline underline-offset-2 whitespace-nowrap">PC Rakitan</a>
+                    </div>
 
                     <!-- Autocomplete Suggestions Dropdown -->
                     <div x-show="autocompleteOpen && searchQuery.trim().length > 0" x-cloak
@@ -448,48 +507,60 @@
                     </div>
                 </div>
 
-                <!-- Actions: Wishlist, Cart & Profile (Bigger & Ergonomic) -->
-                <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <!-- Actions: Wishlist, Cart & Profile (Clear, Ergonomic & Familiar) -->
+                <div class="flex items-center gap-2 sm:gap-3.5 shrink-0">
                     
+                    <!-- 1. Wishlist Icon -->
+                    @auth
+                        @php $wishlistCount = auth()->user()->wishlists()->count(); @endphp
+                        <a href="{{ route('wishlist.index') }}"
+                           class="relative p-2.5 text-slate-700 hover:text-rose-500 rounded-xl hover:bg-rose-50/60 transition hidden sm:flex items-center justify-center group"
+                           title="Wishlist Saya">
+                            <svg class="w-6 h-6 text-slate-700 group-hover:text-rose-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                            @if($wishlistCount > 0)
+                                <span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-rose-500 text-white text-[11px] font-black flex items-center justify-center shadow-xs">
+                                    {{ $wishlistCount > 99 ? '99+' : $wishlistCount }}
+                                </span>
+                            @endif
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                           class="relative p-2.5 text-slate-700 hover:text-rose-500 rounded-xl hover:bg-rose-50/60 transition hidden sm:flex items-center justify-center group"
+                           title="Wishlist (Masuk untuk menyimpan)">
+                            <svg class="w-6 h-6 text-slate-700 group-hover:text-rose-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        </a>
+                    @endauth
+
+                    <!-- 2. Cart Icon (Always Accessible with Live Badge Counter) -->
+                    @php
+                        $cartCount = auth()->check() ? (auth()->user()->cart?->total_count ?? 0) : 0;
+                    @endphp
+                    <a href="{{ route('cart.index') }}"
+                       x-data="{ count: {{ $cartCount }} }"
+                       @cart-updated.window="count++"
+                       class="relative p-2.5 text-slate-700 hover:text-emerald-600 rounded-xl hover:bg-emerald-50 transition flex items-center justify-center group"
+                       title="Keranjang Belanja">
+                        <svg class="w-6 h-6 text-slate-700 group-hover:text-emerald-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <span x-show="count > 0"
+                              x-text="count > 99 ? '99+' : count"
+                              class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 rounded-full bg-emerald-600 text-white text-[11px] font-black flex items-center justify-center shadow-xs">
+                            {{ $cartCount > 99 ? '99+' : $cartCount }}
+                        </span>
+                    </a>
+
+                    <!-- Subtle Divider -->
+                    <div class="h-7 w-px bg-slate-200 hidden sm:block mx-0.5"></div>
+
+                    <!-- 3. Profile / Auth Actions -->
                     @auth
                         @if(auth()->user()->isAdmin())
                             <!-- Admin Panel Direct Button -->
                             <a href="{{ route('admin.dashboard') }}"
-                               class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-xs sm:text-sm font-black transition shadow-2xs">
+                               class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-xs font-black transition shadow-2xs">
                                 <svg class="w-4 h-4 text-purple-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
                                 <span class="hidden sm:inline">Panel Admin</span>
-                            </a>
-                        @else
-                            <!-- Wishlist Icon -->
-                            @php
-                                $wishlistCount = auth()->user()->wishlists()->count();
-                            @endphp
-                            <a href="{{ route('wishlist.index') }}"
-                               class="relative p-2.5 sm:p-3 text-slate-700 hover:text-rose-500 rounded-2xl hover:bg-slate-100 transition hidden sm:flex items-center justify-center"
-                               title="Wishlist Saya">
-                                <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                                @if($wishlistCount > 0)
-                                    <span class="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
-                                        {{ $wishlistCount > 99 ? '99+' : $wishlistCount }}
-                                    </span>
-                                @endif
-                            </a>
-
-                            <!-- Cart Icon -->
-                            @php
-                                $cartCount = auth()->user()->cart?->total_count ?? 0;
-                            @endphp
-                            <a href="{{ route('cart.index') }}"
-                               x-data="{ count: {{ $cartCount }} }"
-                               @cart-updated.window="count++"
-                               class="relative p-2.5 sm:p-3 text-slate-700 hover:text-emerald-600 rounded-2xl hover:bg-slate-100 transition flex items-center justify-center"
-                               title="Keranjang Belanja">
-                                <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                                <span x-show="count > 0"
-                                      x-text="count > 99 ? '99+' : count"
-                                      class="absolute top-1 right-1 w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
-                                    {{ $cartCount > 99 ? '99+' : $cartCount }}
-                                </span>
                             </a>
                         @endif
 
@@ -497,11 +568,11 @@
                         <div class="relative" @click.outside="userDropdownOpen = false">
                             <button @click="userDropdownOpen = !userDropdownOpen"
                                     type="button"
-                                    class="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-slate-100 transition focus:outline-hidden">
-                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-emerald-100 text-emerald-800 font-black text-sm sm:text-base flex items-center justify-center border-2 border-emerald-400 shadow-xs">
+                                    class="flex items-center gap-2 p-1 sm:px-2.5 sm:py-1.5 rounded-xl hover:bg-slate-100 transition focus:outline-hidden border border-transparent hover:border-slate-200">
+                                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-black text-sm flex items-center justify-center border-2 border-emerald-500 shadow-2xs">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
-                                <span class="text-sm sm:text-base font-extrabold text-slate-800 hidden md:block max-w-[140px] truncate">
+                                <span class="text-sm font-extrabold text-slate-800 hidden md:block max-w-[120px] truncate">
                                     {{ auth()->user()->name }}
                                 </span>
                                 <svg class="w-4 h-4 text-slate-400 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
@@ -563,14 +634,14 @@
                             </div>
                         </div>
                     @else
-                        <!-- Guest Auth Buttons (Bigger) -->
-                        <div class="flex items-center gap-2.5">
+                        <!-- Guest Auth Buttons -->
+                        <div class="flex items-center gap-2">
                             <a href="{{ route('login') }}"
-                               class="px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-2xl border-2 border-emerald-500 transition">
+                               class="px-4 py-2 sm:px-4.5 sm:py-2.5 text-xs sm:text-sm font-extrabold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/80 rounded-xl border border-emerald-300 transition shadow-2xs">
                                 Masuk
                             </a>
                             <a href="{{ route('register') }}"
-                                class="px-4 sm:px-5 py-2.5 text-sm sm:text-base font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-2xl shadow-xs transition hidden sm:inline-block">
+                                class="px-4 py-2 sm:px-4.5 sm:py-2.5 text-xs sm:text-sm font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-xs hover:shadow-md transition hidden sm:inline-block">
                                 Daftar
                             </a>
                         </div>
