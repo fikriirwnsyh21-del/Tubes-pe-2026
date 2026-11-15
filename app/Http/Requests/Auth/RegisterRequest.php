@@ -17,11 +17,17 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', 'regex:/^[0-9]+$/', 'min:9', 'max:15'],
             'password' => ['required', 'string', 'confirmed', Password::defaults()],
-            'register_as_seller' => ['nullable', 'boolean'],
-            'shop_name' => ['required_if:register_as_seller,1', 'nullable', 'string', 'max:255', 'unique:shops,name'],
-            'shop_city' => ['required_if:register_as_seller,1', 'nullable', 'string', 'max:255'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone.regex' => 'Nomor WhatsApp / HP hanya boleh berisi angka (tidak boleh huruf atau karakter khusus).',
+            'phone.min' => 'Nomor WhatsApp / HP minimal 9 digit angka.',
+            'phone.max' => 'Nomor WhatsApp / HP maksimal 15 digit angka.',
         ];
     }
 }

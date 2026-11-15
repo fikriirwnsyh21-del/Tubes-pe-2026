@@ -197,7 +197,8 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 mb-1">Nomor Telepon <span class="text-rose-500">*</span></label>
-                            <input type="text" name="phone" x-model="addressForm.phone" required placeholder="08xxxxxxxxxx"
+                            <input type="tel" name="phone" x-model="addressForm.phone" inputmode="numeric" pattern="[0-9]*" maxlength="15" required placeholder="08xxxxxxxxxx"
+                                   @input="addressForm.phone = $event.target.value.replace(/[^0-9]/g, '')"
                                    class="w-full px-3 py-2.5 bg-gray-50 border @error('phone') border-rose-400 bg-rose-50/20 @else border-gray-300 @enderror rounded-xl text-xs text-gray-900 focus:bg-white focus:ring-1 focus:ring-emerald-500 outline-none">
                             @error('phone')
                                 <p class="text-[11px] text-rose-600 font-semibold mt-1">{{ $message }}</p>

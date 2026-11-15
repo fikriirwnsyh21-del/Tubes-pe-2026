@@ -41,9 +41,12 @@
 
         <div>
             <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Nomor WhatsApp / HP</label>
-            <input id="phone" type="text" name="phone" value="{{ old('phone') }}"
+            <input id="phone" type="tel" name="phone" inputmode="numeric" pattern="[0-9]*" value="{{ old('phone') }}"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                    class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition text-sm text-gray-900"
-                   placeholder="08123456789">
+                   placeholder="08123456789"
+                   maxlength="15">
+            <p class="text-[11px] text-gray-400 mt-1">Hanya boleh angka (contoh: 08123456789)</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

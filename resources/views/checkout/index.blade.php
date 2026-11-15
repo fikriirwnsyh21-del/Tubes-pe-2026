@@ -525,7 +525,8 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gray-700 mb-1">Nomor Telepon <span class="text-rose-500">*</span></label>
-                                <input type="text" name="phone" value="{{ old('phone') }}" required placeholder="08xxxxxxxxxx"
+                                <input type="tel" name="phone" inputmode="numeric" pattern="[0-9]*" value="{{ old('phone') }}" required placeholder="08xxxxxxxxxx" maxlength="15"
+                                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                        class="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 focus:bg-white focus:ring-1 focus:ring-emerald-500 outline-none">
                             </div>
                         </div>

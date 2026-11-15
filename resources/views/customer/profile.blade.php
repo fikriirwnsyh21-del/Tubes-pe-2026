@@ -51,7 +51,8 @@
                 <!-- Nomor Telepon / WA -->
                 <div>
                     <label for="phone" class="block text-xs font-bold text-gray-700 mb-1.5">Nomor Handphone / WhatsApp</label>
-                    <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Contoh: 081234567890"
+                    <input type="tel" id="phone" name="phone" inputmode="numeric" pattern="[0-9]*" maxlength="15" value="{{ old('phone', $user->phone) }}" placeholder="Contoh: 081234567890"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                            class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 bg-gray-50 text-xs sm:text-sm text-gray-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15">
                     @error('phone') <p class="text-rose-500 text-[10px] mt-1">{{ $message }}</p> @enderror
                 </div>
